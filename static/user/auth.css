@@ -1,0 +1,51 @@
+.formbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    min-height: 90vh;
+}
+.formbox input{
+    height: 7vh;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid gray;
+}
+.formbox ::placeholder{
+    font-style: oblique;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+.topinput{
+    display: flex;
+    gap: 5px;
+}
+.formlogin input{
+    width: 100%;
+  height: 7vh;
+  border-radius: 5px;
+  border: 1px solid gray;
+  outline: none;
+  margin-bottom: 1rem;
+    
+}
+.fp{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.formlogin{
+    display: flex;
+    justify-content: center;
+    min-height: 60vh;
+    margin-top: 5rem;
+}
+.formlogin ::placeholder{
+    font-style: oblique;
+    padding-bottom: -20rem;
+}

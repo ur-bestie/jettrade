@@ -1,0 +1,386 @@
+{% extends 'admin_temp/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between g-3">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Giftcard Transaction</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>You have total {{t_tal}} orders.</p>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <ul class="nk-block-tools g-3">
+                                        <li><a href="#" class="btn btn-white btn-dim btn-outline-light"><em class="icon ni ni-download-cloud"></em><span>Export</span></a></li>
+                                        <li class="nk-block-tools-opt">
+                                            <div class="drodown">
+                                                <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-bs-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="#"><span>Add Tranx</span></a></li>
+                                                        <li><a href="#"><span>Add Deposit</span></a></li>
+                                                        <li><a href="#"><span>Add Withdraw</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="card card-bordered card-stretch">
+                        <div class="card-inner-group">
+                            <div class="card-inner">
+                                <div class="card-title-group">
+                                    <div class="card-title">
+                                        <h5 class="title">All Orders</h5>
+                                    </div>
+                                    <div class="card-tools me-n1">
+                                        <ul class="btn-toolbar gx-1">
+                                            <li>
+                                                <a href="#" class="search-toggle toggle-search btn btn-icon" data-target="search"><em class="icon ni ni-search"></em></a>
+                                            </li><!-- li -->
+                                            <li class="btn-toolbar-sep"></li><!-- li -->
+                                            <li>
+                                                <div class="dropdown">
+                                                    <a href="#" class="btn btn-trigger btn-icon dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <div class="badge badge-circle bg-primary">4</div>
+                                                        <em class="icon ni ni-filter-alt"></em>
+                                                    </a>
+                                                    <div class="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                                                        <div class="dropdown-head">
+                                                            <span class="sub-title dropdown-title">Advance Filter</span>
+                                                            <div class="dropdown">
+                                                                <a href="#" class="link link-light">
+                                                                    <em class="icon ni ni-more-h"></em>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dropdown-body dropdown-body-rg">
+                                                            <div class="row gx-6 gy-4">
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="overline-title overline-title-alt">Type</label>
+                                                                        <select class="form-select js-select2">
+                                                                            <option value="any">Any Type</option>
+                                                                            <option value="deposit">Deposit</option>
+                                                                            <option value="buy">Buy Coin</option>
+                                                                            <option value="sell">Sell Coin</option>
+                                                                            <option value="transfer">Transfer</option>
+                                                                            <option value="withdraw">Withdraw</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="overline-title overline-title-alt">Status</label>
+                                                                        <select class="form-select js-select2">
+                                                                            <option value="any">Any Status</option>
+                                                                            <option value="pending">Pending</option>
+                                                                            <option value="cancel">Cancel</option>
+                                                                            <option value="process">Process</option>
+                                                                            <option value="completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="overline-title overline-title-alt">Pay Currency</label>
+                                                                        <select class="form-select js-select2">
+                                                                            <option value="any">Any Coin</option>
+                                                                            <option value="bitcoin">Bitcoin</option>
+                                                                            <option value="ethereum">Ethereum</option>
+                                                                            <option value="litecoin">Litecoin</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="overline-title overline-title-alt">Method</label>
+                                                                        <select class="form-select js-select2">
+                                                                            <option value="any">Any Method</option>
+                                                                            <option value="paypal">PayPal</option>
+                                                                            <option value="bank">Bank</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <div class="custom-control custom-control-sm custom-checkbox">
+                                                                            <input type="checkbox" class="custom-control-input" id="includeDel">
+                                                                            <label class="custom-control-label" for="includeDel"> Including Deleted</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <button type="button" class="btn btn-secondary">Filter</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dropdown-foot between">
+                                                            <a class="clickable" href="#">Reset Filter</a>
+                                                            <a href="#savedFilter" data-bs-toggle="modal">Save Filter</a>
+                                                        </div>
+                                                    </div><!-- .filter-wg -->
+                                                </div><!-- .dropdown -->
+                                            </li><!-- li -->
+                                            <li>
+                                                <div class="dropdown">
+                                                    <a href="#" class="btn btn-trigger btn-icon dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <em class="icon ni ni-setting"></em>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end">
+                                                        <ul class="link-check">
+                                                            <li><span>Show</span></li>
+                                                            <li class="active"><a href="#">10</a></li>
+                                                            <li><a href="#">20</a></li>
+                                                            <li><a href="#">50</a></li>
+                                                        </ul>
+                                                        <ul class="link-check">
+                                                            <li><span>Order</span></li>
+                                                            <li class="active"><a href="#">DESC</a></li>
+                                                            <li><a href="#">ASC</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div><!-- .dropdown -->
+                                            </li><!-- li -->
+                                        </ul><!-- .btn-toolbar -->
+                                    </div><!-- .card-tools -->
+                                    <div class="card-search search-wrap" data-search="search">
+                                        <div class="search-content">
+                                            <a href="#" class="search-back btn btn-icon toggle-search" data-target="search"><em class="icon ni ni-arrow-left"></em></a>
+                                            <input type="text" class="form-control border-transparent form-focus-none" placeholder="Quick search by transaction">
+                                            <button class="search-submit btn btn-icon"><em class="icon ni ni-search"></em></button>
+                                        </div>
+                                    </div><!-- .card-search -->
+                                </div><!-- .card-title-group -->
+                            </div><!-- .card-inner -->
+                            <div class="card-inner p-0">
+                                <div class="nk-tb-list nk-tb-tnx">
+                                    <div class="nk-tb-item nk-tb-head">
+                                        <div class="nk-tb-col"><span>Details</span></div>
+                                        <div class="nk-tb-col tb-col-xxl"><span>Source</span></div>
+                                        <div class="nk-tb-col tb-col-lg"><span>Business Type</span></div>
+                                        <div class="nk-tb-col text-end"><span>Amount</span></div>
+                                        <div class="nk-tb-col text-end tb-col-sm"><span>Payment</span></div>
+                                        <div class="nk-tb-col nk-tb-col-status"><span class="sub-text d-none d-md-block">Status</span></div>
+                                        <div class="nk-tb-col nk-tb-col-tools"></div>
+                                    </div><!-- .nk-tb-item -->
+
+                                    {% for x in x reversed %}
+                                    <div class="nk-tb-item">
+                                        <div class="nk-tb-col">
+                                            <div class="nk-tnx-type">
+                                                <div class="nk-tnx-type-icon bg-success-dim text-success">
+                                                    <img src="{{x.giftcard.logo.url}}" alt="">
+                                                </div>
+                                                <div class="nk-tnx-type-text">
+                                                    <span class="tb-lead">{{x.giftcard.name}}</span>
+                                                    <span class="tb-date">{{x.buy_date}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-xxl">
+                                            <span class="tb-lead-sub">Using PayPal Account</span>
+                                            <span class="tb-sub">mypay*****com</span>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-lg">
+                                            <span class="tb-lead-sub"></span>
+                                            <span class="badge badge-dot bg-success">Buy</span>
+                                        </div>
+                                        <div class="nk-tb-col text-end">
+                                            <!-- <span class="tb-amount">+ 0.010201 <span>BTC</span></span> -->
+                                            <span class="tb-amount-sm">{{x.amount}} USD</span>
+                                        </div>
+                                        <div class="nk-tb-col text-end tb-col-sm">
+                                            <!-- <span class="tb-amount">1.30910201 <span>BTC</span></span> -->
+                                            <span class="tb-amount-sm">{{x.payment}} NGN</span>
+                                        </div>
+                                        <div class="nk-tb-col nk-tb-col-status">
+                                            <div class="dot dot-success d-md-none"></div>
+                                           {% if x.status %}
+                                           <span class="badge badge-sm badge-dim bg-outline-success d-none d-md-inline-flex">Approved</span>
+                                           {% else %}
+                                           <span class="badge badge-sm badge-dim bg-outline-warning d-none d-md-inline-flex">Pending</span>
+                                           {% endif %}
+                                        </div>
+                                       
+                                        <div class="nk-tb-col nk-tb-col-tools">
+                                            <ul class="nk-tb-actions gx-2">
+                                                
+                                                <div class="dropdown">
+                                                    <a href="#" class="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt">
+                                                            {% if x.status %}
+                                                            <li><a href="#tranxDetails{{x.id}}" data-bs-toggle="modal"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                            {% else %}
+                                                            <form action="" method="POST">
+                                                                {% csrf_token %}
+                                                                <input type="text" name="u_id" value="{{x.id}}" hidden>
+                                                            <li><button class="btn" type="submit"><em class="icon ni ni-done"></em><span>Approve</span></button></li>
+                                                        </form>
+                                                            <li><a href="/superadmin/trangiftbuydelete/{{x.id}}"><em class="icon ni ni-cross-round"></em><span>Reject</span></a></li>
+                                                           
+                                                            <li><a href="#tranxDetails{{x.id}}" data-bs-toggle="modal"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                        {% endif %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!-- .nk-tb-item -->
+
+
+<!-- Modal Default -->
+<div class="modal fade" tabindex="-1" id="tranxDetails{{x.id}}">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-body modal-body-md">
+                <div class="nk-modal-head mb-3 mb-sm-5">
+                    <h4 class="nk-modal-title title">Transaction ID: <small class="text-primary">{{x.invoice}}</small></h4>
+                </div>
+                <div class="nk-tnx-details">
+                    <div class="nk-block-between flex-wrap g-3">
+                        <div class="nk-tnx-type">
+                            <div class="nk-tnx-type-icon bg-warning text-white">
+                                <img src="{{x.coin.logo.url}}" alt="">
+                            </div>
+                            <div class="nk-tnx-type-text">
+                                <h5 class="title">+ 0.004560 BTC</h5>
+                                <span class="sub-text mt-n1">15 Oct, 2019 09:45 PM</span>
+                            </div>
+                        </div>
+                        <ul class="align-center flex-wrap gx-3">
+                            <li>
+                                <span class="badge badge-sm badge-success">Completed</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nk-modal-head mt-sm-5 mt-4 mb-4">
+                        <h5 class="title">Transaction Info</h5>
+                    </div>
+                    <div class="row gy-3">
+                        <div class="col-lg-6">
+                            <span class="sub-text">Order ID</span>
+                            <span class="caption-text">YWLX52JG73</span>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="sub-text">Reference ID</span>
+                            <span class="caption-text text-break">NIY9TB2JG73YWLXPYM2U8HR</span>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="sub-text">Transaction Fee</span>
+                            <span class="caption-text">0.000002 BTC</span>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="sub-text">Amount</span>
+                            <span class="caption-text">0.004560 BTC</span>
+                        </div>
+                    </div><!-- .row -->
+                    <div class="nk-modal-head mt-sm-5 mt-4 mb-4">
+                        <h5 class="title">Transaction Details</h5>
+                    </div>
+                    <div class="row gy-3">
+                        <div class="col-lg-6">
+                            <span class="sub-text">Transaction Type</span>
+                            <span class="caption-text">Deposit</span>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="sub-text">Payment Gateway</span>
+                            <span class="caption-text align-center">CoinPayments <span class="badge bg-primary ms-2 text-white">Online Gateway</span></span>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="sub-text">Payment From</span>
+                            <span class="caption-text text-break">1xA058106537340385c87d264f93</span>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="sub-text">Payment To</span>
+                            <span class="caption-text text-break">1x0385c87d264A05810653734f93</span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span class="sub-text">Transaction Hash</span>
+                            <span class="caption-text text-break">Tx156d3342d5c87d264f9359200xa058106537340385c87d264f93</span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span class="sub-text">Details</span>
+                            <span class="caption-text">Deposit Fund for Investment</span>
+                        </div>
+                    </div><!-- .row -->
+                </div><!-- .nk-tnx-details -->
+            </div><!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div><!-- .modal -->
+
+
+                                   {% endfor %}
+                                    
+                                </div><!-- .nk-tb-list -->
+                            </div><!-- .card-inner -->
+                            <div class="card-inner">
+                                <ul class="pagination justify-content-center justify-content-md-start">
+                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
+                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </div><!-- .card-inner -->
+                        </div><!-- .card-inner-group -->
+                    </div><!-- .card -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+
+
+
+
+
+
+ 
+
+<!-- Modal Default -->
+<div class="modal fade" tabindex="-1" id="savedFilter">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal Title</h5>
+                <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <em class="icon ni ni-cross"></em>
+                </a>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem similique earum necessitatibus nesciunt! Quia id expedita asperiores voluptatem odit quis fugit sapiente assumenda sunt voluptatibus atque facere autem, omnis explicabo.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <span class="sub-text">Modal Footer Text</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

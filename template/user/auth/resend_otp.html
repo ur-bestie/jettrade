@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'user/auth/top.html' %}
+
+            <!-- Body: Body -->
+            <div class="body ">
+                <div class="container">
+ {% for message in messages %}
+ {{message}}
+ {% endfor %}
+                    <div class="row g-3">
+
+                        <div class="col-lg-6 d-flex justify-content-center align-items-center auth-h100">
+                            <div class="d-flex flex-column">
+                                <h1>Resend otp</h1>
+                                <span class="text-muted">Enter your email address.</span>
+                                <div class="card mt-4 mb-3" style="max-width: 30rem;">
+                                    <div class="card-body p-4">
+                                        <form class="row g-1" method="POST" action="">
+                                            {% csrf_token %}
+                                            <div class="col">
+                                                <div class="mb-2">
+                                                    <input name="email" class="form-control form-control-lg text-center" placeholder="Registerd Email Address">
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="col-12 text-center mt-4">
+                                                <button style="background-color: dodgerblue;" type="submit" class="btn text-white text-uppercase fs-7">Get New Otp</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                    </div> <!-- End Row -->
+               
+    {% include 'user/auth/buttom.html' %}

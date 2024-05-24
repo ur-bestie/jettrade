@@ -1,0 +1,423 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .button {
+  width: 13rem;
+  height: 40px;
+  background-image: linear-gradient(rgb(214, 202, 254), rgb(158, 129, 254));
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  transition-duration: .3s;
+}
+
+.cartIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.cartIcon path {
+  fill: white;
+}
+
+.button:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10rem;
+  transition: all 0.02s;
+  font-weight: bold;
+  color: rgb(37, 37, 37);
+  z-index: 0;
+  box-shadow: 0 0px 7px -5px rgba(0, 0, 0, 0.5);
+}
+
+.button:hover {
+  background: rgb(193, 228, 248);
+  color: rgb(33, 0, 85);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.hoverEffect {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.hoverEffect div {
+  background: rgb(222,0,75);
+  background: linear-gradient(90deg, rgba(222,0,75,1) 0%, rgba(191,70,255,1) 49%, rgba(0,212,255,1) 100%);
+  border-radius: 40rem;
+  width: 10rem;
+  height: 10rem;
+  transition: 0.4s;
+  filter: blur(20px);
+  animation: effect infinite 3s linear;
+  opacity: 0.5;
+}
+
+.button:hover .hoverEffect div {
+  width: 8rem;
+  height: 8rem;
+}
+
+@keyframes effect {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ui */
+
+    /* Dashboard container */
+    .dashboard {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        
+    }
+
+    /* Card styles */
+    .carddah {
+        width: 150px;
+        height: 190px;
+        background-color: white;
+        border-radius: 10px;
+        margin: 10px;
+        display: flex;
+        box-shadow: 2px -3px 3px 0px rgba(0,0,0,0.2);
+        flex-direction: column;
+        gap:2px ;
+        align-items: start;
+        justify-content: center;
+        text-align: left;
+        padding: 10px;
+    }
+    .carddah  img{
+      width: 30%;
+      
+    }
+    .carddah  .img{
+      min-height: 5vh;
+    }
+    .carddah .content{
+      min-height: 10vh;
+      margin-top: 30px;
+    }
+    .carddah h6{
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .carddah p{
+      font-style: bold;
+      font-weight: 600;
+    }
+    .carddah a:hover{
+      color: dodgerblue;
+    }
+    @media (min-width: 534px) {
+  .carddah{
+    width: 100%;
+  }
+  .carddah h6{
+      margin-top: 1rem;
+    }
+    
+}
+@media (max-width: 363px) {
+  .carddah{
+    width: 100%;
+  }
+}
+</style>
+<div class="row g-3 mb-3" >
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="d-flex">
+                            <img class="avatar rounded-circle" src="{% static 'user/images/profile_av.svg' %}" alt="profile">
+                            <div class="flex-fill ms-3">
+                                <p class="mb-0"><span class="font-weight-bold">{{user.username}}</span></p>
+                                <small class="">{{user.email}}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="d-flex flex-column">
+                            {% if active.status %}
+                            <span class="text-muted mb-1">User verification: Verified</span>
+                            {% else %}
+                            <span class="text-muted mb-1">User verification: Not yet</span>
+                           {% endif %}
+                        </div>
+                    </div>
+                    
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Row End -->
+
+<!-- <div class="top_userdiv" style="width: 100%;display: flex;justify-content: center;align-items: center;gap: 1rem;">
+    <div class="content1" style="padding: 1rem;">
+        <p>
+            <b>Jettrade</b> emerges as a leading crypto trading platform that prioritizes speed, efficiency, and security. With its instant transaction capabilities, user-friendly interface, and advanced trading tools, Jettrade empowers users to navigate the dynamic cryptocurrency markets with confidence. Whether you're a seasoned trader or a newcomer to the world of crypto, Jettrade offers a reliable platform for executing trades with unparalleled speed and precision.
+        </p>
+        <div style="display: flex;gap: 5px;">
+          <button class="button" style="font-size: 11px;">
+            Trade crypto
+            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+            <div class="hoverEffect">
+            <div>
+            </div>
+            </div></button>
+          
+<br><br>
+
+
+          <button class="button" style="font-size: 11px;">
+            Trade Giftcard
+            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+            </button>
+
+
+
+        </div>
+    </div>
+    <div class="content">
+        <canvas id="myChart"></canvas>
+    </div>
+  </div><br> -->
+
+
+  <div class="container">
+     <!-- Dashboard -->
+     <div class="dashboard">
+      <!-- Card 1 -->
+     
+        <div class="carddah" style="background-color: aliceblue;">
+          <a href="/cryptobuy">
+          <div class="img">
+            <img src="{% static 'user/images/coin/BTC.png' %}" alt="">
+          </div>
+          <div class="content">
+            <h6>Buy crypto</h6>
+          <p>All crypto are available with fast delivery</p>
+          </div>
+        </a>
+      </div>
+      
+
+      <!-- Card 2 -->
+    
+       <div class="carddah" style="background-color: rgb(246, 241, 241);">
+        <a href="/cryptosell">
+        <div class="img">
+          <img src="{% static 'user/images/coin/BNB.png' %}" alt="">
+        </div>
+<div class="content">
+  <h6>Sell crypto</h6>
+  <p>We also buy any crypto that you have in your wallet </p>
+</div>
+</a>
+      </div>
+     
+
+      <!-- Card 3 -->
+      <div class="carddah" style="background-color:rgb(253, 245, 235);">
+        <a href="/giftcardbuy">
+        <div class="img">
+          <img src="{% static 'user/images/gift-card.png' %}" alt="">
+        </div>
+        <div class="content">
+          <h6>Buy Giftcard</h6>
+        <p>Giftcards are available with fast delivery</p>
+        </div>
+      </a>
+      </div>
+
+      <div class="carddah" style="background-color: rgb(214, 212, 212);">
+        <div class="img">
+          <img src="{% static 'user/images/gift-card.png' %}" alt="">
+        </div>
+<div class="content">
+  <h6>Sell Giftcard</h6>
+  <p>We also buy any Giftcards that you have </p>
+</div>
+    </div>
+
+      <!-- Add more cards as needed -->
+  </div>
+  </div>
+
+<div class="container mb-3">
+    
+
+              <div class="cardgrcontainer">
+                <!-- <div class="cardgr" style="background-color: skyblue;">
+                <h4>complete your profile 2/3</h4>
+                <p>connect your bank</p>
+                <button class="btn btn-primary">Upgrade your profile</button>
+                </div> -->
+              
+
+                <div class="cardgr">
+                    <img style="width: 100%;height: 100%;" src="{% static 'user/images/jettradebanner.png' %}" alt="">
+                </div>
+
+
+
+              
+
+                <div class="cardgr cardgrbg">
+                  <div class="content" style="width: 100%;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                     </div>
+
+            </div>
+<br>
+            <div class="cardgr" style="border: 1px solid gray;">
+              <h6>crypto Buyign rate</h6>
+             <h1>₦{{x.crypto_buying_rate}}</h1>
+             <p>per dollar</p>
+              </div>
+
+           
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+                 
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script><div id="coinmarketcap-widget-coin-price-block" coins="1,1027,825,30105,5426,52,512,3890,2,27663,24781,1321" currency="USD" theme="light" transparent="false" show-symbol-logo="true"></div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+</div><br><br>
+
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+                <h6 class="mb-0 fw-bold">Recent Transactions</h6> 
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="example" class="priceTable table table-hover custom-table-2 table-bordered align-middle mb-0" style="width:100%">
+                      <thead>
+                        <tr>
+                          <th>Quote#</th>
+                          <th>Product</th>
+                          <th>Business type</th>
+                          <th>Policy holder</th>
+                          <th>Premium</th>
+                          <th>Status</th>
+                          <th>Updated at</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                            <td>09-18 17:32:15</td>
+                            <td><img src="{% static 'user/images/coin/ETH.png' %}" alt="" class="img-fluid avatar mx-1">ETH/USDT</td>
+                            <td><span class="color-price-down">Sell</span></td>
+                            <td>3,487.50</td>
+                            <td>0.0110</td>
+                            <td>0.03836250 USDT</td>
+                            <td>38.36250000 USDT</td>
+                        </tr>
+                        <tr>
+                            <td>09-18 17:31:11</td>
+                            <td><img src="{% static 'user/images/coin/SOL.png' %}" alt="" class="img-fluid avatar mx-1">SOL/USDT</td>
+                            <td><span class="color-price-down">Sell</span></td>
+                            <td>160.33</td>
+                            <td>0.75</td>
+                            <td>0.12024750 USDT</td>
+                            <td>120.24750000 USDT</td>
+                        </tr>
+                        <tr>
+                            <td>09-18 08:52:04</td>
+                            <td><img src="{% static 'user/images/coin/ETH.png' %}" alt="" class="img-fluid avatar mx-1">ETH/USDT</td>
+                            <td><span class="color-price-up">Buy</span></td>
+                            <td>3,439.20</td>
+                            <td>0.0111</td>
+                            <td>0.00001110 ETH</td>
+                            <td>38.17512000 USDT</td>
+                        </tr>
+                        <tr>
+                            <td>09-17 08:34:14</td>
+                            <td><img src="{% static 'user/images/coin/SOL.png' %}" alt="" class="img-fluid avatar mx-1">SOL/USDT</td>
+                            <td><span class="color-price-up">Buy</span></td>
+                            <td>147.04</td>
+                            <td>0.76</td>
+                            <td>0.00076000 SOL</td>
+                            <td>111.75040000 USDT</td>
+                        </tr>
+                    </tbody>
+
+                  </table>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+</div><br><br> -->
+
+{% endblock %}

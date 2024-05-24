@@ -1,0 +1,355 @@
+.cardgr {
+    color: black;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    border-radius:10px ;
+  }
+
+  .cardgrcontainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 600px) {
+    .cardgrcontainer { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 900px) {
+    .cardgrcontainer { grid-template-columns: repeat(3, 1fr); }
+  }
+
+
+.cardgrbg{
+   background-size: cover; 
+}
+.top{
+  display: flex;
+}
+.cryptoc{
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cryptoc .boxcontent{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+  
+}
+.box{
+  border-radius: 10px;
+  border: 1px solid gray;
+  padding: 10px;
+  overflow: hidden;
+}
+.cryptoc .btn{
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  right: 30;
+}
+.cryptoc .img{
+width: 50%;
+margin-left: 2rem;
+}
+.cryptoc img{
+  width: 60%;
+  }
+.icondiv p{
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.actionbtn{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+.actionbtn a{
+  font-size: 12.5px;
+  font-weight: 700;
+  color: gray;
+}
+
+.pform{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.pform form{
+  width: 100%;
+}
+.pform h1{
+  text-align: center;
+  font-style: italic;
+  font-variant: small-caps;
+  font-size: 25px;
+  margin-bottom: 2rem;
+}
+.pform label{
+  font-size: 14px;
+    font-weight: 600;
+    color: #344357;
+    font-style: oblique;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+}
+.pform .rate{
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+.pform .rate p{
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 600;
+}
+.pform .btn{
+  display: flex;
+  justify-content: center;
+}
+.pform .pamount p{
+font-size: 14px;
+font-weight: 600;
+}
+.pform .pamount span{
+  color: dodgerblue;
+  }
+.pform .binput{
+  width: 100%;
+  height: 11vh;
+  border: 1px solid #dee2e6;
+  outline: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+.aminput{
+  width: 100%;
+  height: 7vh;
+  border: 1px solid #dee2e6;
+  outline: none;
+  border-radius: 5px;
+  margin-bottom: 5px; 
+}
+@media (min-width: 769px) {
+  .pform form{
+    width: 50%;
+  }
+}
+
+
+
+@media (max-width: 665px) {
+  .top_userdiv{
+    flex-direction: column;
+  }
+  .content1{
+    width: 100%;
+  }
+}
+
+.dynamic-select {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  user-select: none;
+ 
+}
+.dynamic-select .dynamic-select-header {
+  border: 1px solid #dee2e6;
+  padding: 7px 30px 7px 12px;
+}
+.dynamic-select .dynamic-select-header::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23949ba3' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
+  height: 12px;
+  width: 12px;
+}
+.dynamic-select .dynamic-select-header.dynamic-select-header-active {
+  border-color: #c1c9d0;
+}
+.dynamic-select .dynamic-select-header.dynamic-select-header-active::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+.dynamic-select .dynamic-select-header.dynamic-select-header-active + .dynamic-select-options {
+  display: flex;
+}
+.dynamic-select .dynamic-select-header .dynamic-select-header-placeholder {
+  color: #65727e;
+}
+.dynamic-select .dynamic-select-options {
+  display: none;
+  box-sizing: border-box;
+  flex-flow: wrap;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.dynamic-select .dynamic-select-options::-webkit-scrollbar {
+  width: 5px;
+}
+.dynamic-select .dynamic-select-options::-webkit-scrollbar-track {
+  background: white;
+}
+.dynamic-select .dynamic-select-options::-webkit-scrollbar-thumb {
+  background: white;
+}
+.dynamic-select .dynamic-select-options::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+.dynamic-select .dynamic-select-options .dynamic-select-option {
+  padding: 7px 12px;
+}
+.dynamic-select .dynamic-select-options .dynamic-select-option:hover, .dynamic-select .dynamic-select-options .dynamic-select-option:active {
+  background-color: white;
+}
+.dynamic-select .dynamic-select-header, .dynamic-select .dynamic-select-option {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 45px;
+  font-size: 16px;
+  color: #212529;
+}
+.dynamic-select .dynamic-select-header img, .dynamic-select .dynamic-select-option img {
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+}
+.dynamic-select .dynamic-select-header img.dynamic-size, .dynamic-select .dynamic-select-option img.dynamic-size {
+  object-fit: fill;
+  max-height: none;
+  max-width: none;
+}
+.dynamic-select .dynamic-select-header img, .dynamic-select .dynamic-select-header svg, .dynamic-select .dynamic-select-header i, .dynamic-select .dynamic-select-header span, .dynamic-select .dynamic-select-option img, .dynamic-select .dynamic-select-option svg, .dynamic-select .dynamic-select-option i, .dynamic-select .dynamic-select-option span {
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+.dynamic-select .dynamic-select-header.dynamic-select-no-text, .dynamic-select .dynamic-select-option.dynamic-select-no-text {
+  justify-content: center;
+}
+.dynamic-select .dynamic-select-header.dynamic-select-no-text img, .dynamic-select .dynamic-select-header.dynamic-select-no-text svg, .dynamic-select .dynamic-select-header.dynamic-select-no-text i, .dynamic-select .dynamic-select-header.dynamic-select-no-text span, .dynamic-select .dynamic-select-option.dynamic-select-no-text img, .dynamic-select .dynamic-select-option.dynamic-select-no-text svg, .dynamic-select .dynamic-select-option.dynamic-select-no-text i, .dynamic-select .dynamic-select-option.dynamic-select-no-text span {
+  margin-right: 0;
+}
+.dynamic-select .dynamic-select-header .dynamic-select-option-text, .dynamic-select .dynamic-select-option .dynamic-select-option-text {
+  box-sizing: border-box;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: inherit;
+  font-size: inherit;
+}
+.passrest{
+  display: flex;
+  justify-content: center;
+  min-height: 60vh;
+ 
+}
+.passrest label{
+  color: black;
+  font-weight: 500;
+  font-style: oblique;
+}
+.passrest form input{
+  width: 100%;
+  height: 10vh;
+  border-radius: 5px;
+  border: 1px solid gray;
+  outline: none;
+  margin-bottom: 1rem;
+}
+.mtbtn{
+  display: flex;
+  justify-content: center;
+}
+
+.topnav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.paymentinfo{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: white;
+ padding: 1rem;
+ border-radius: 5px;
+}
+.paymentinfo .top{
+  display: flex;
+  flex-direction: column;
+}
+.paymentinfo .content{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 5px;
+  
+}
+
+.paymentinfo .top_content{
+  background-color: whitesmoke;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.paymentinfo .btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.paymentinfo .btn a{
+  font-size: 13px;
+}
+.paymentinfo .btn .btn-cancel{
+border: 1px solid gray;
+}
+.paymentinfo .copy{
+  border-radius: 5px;
+
+}
+.jettradebg{
+  background-color: #2D2BA4;
+  color: white;
+}
+.jettradecolor{
+  color: #2D2BA4;
+}
+.paymentinfo .copyinput{
+  border-radius: 5px;
+  border: 1px solid gray;
+  margin-bottom: 3px;
+  outline: none;
+}

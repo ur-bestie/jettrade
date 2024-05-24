@@ -1,0 +1,104 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+{% if active.status %}
+<div class="container mb-5">
+    <div class="pform">
+        <form action="" method="POST">
+            {% csrf_token %}
+        <div class="actionbtn">
+            <a href="#" style="border-bottom: 3px solid dodgerblue;padding-bottom: 10px;color: dodgerblue;">Buy Coin</a>
+             <a href="/cryptosell">Sell Coin</a>
+        </div><br>
+        <h1>What Do you Want To Buy?</h1>
+        <label for="">choose what you want to buy </label>
+        <div class="selectopt">
+            <select style="background-color: white;" id="productSelect" name="c_id" data-placeholder="Select a country" data-dynamic-select>
+                {% for x in x %}
+                <option value="{{x.id}}" data-img="{{x.logo.url}}" >{{x.name}}</option>
+                
+                {% endfor %}
+            </select>
+        </div><br>
+        <label for="inputam">Amount To Buy $</label><br>
+        <input class="aminput" name="amount" type="number" id="inputam" placeholder=" $1,000">
+        <p>Rate In Naira: <span id="rate">{{sinfo.crypto_buying_rate}}</span></p>
+        <div class="pamount">
+            <p>Payment: <span id="payment">0.00</span></p>
+            <input hidden type="number" name="payment" id="paymentInput">
+            <input hidden type="number" name="rate_naira" value="{{sinfo.crypto_buying_rate}}">
+        </div>
+        <label for="inputam">Your Receiving Wallet Address</label><br>
+        <input class="aminput" type="text" name="receiving_address" id="inputam" placeholder="">
+    <label for="">choose Payment Method </label>
+        <div class="selectopt">
+        <select style="background-color: white;" id="country" name="p_id" data-placeholder="Select a country" data-dynamic-select>
+           {% for p in pg %}
+            <option value="{{p.id}}" data-img="{{p.logo.url}}">{{p.name}}</option>
+            {% endfor %}
+        </select><br><br>
+    <div class="btn">
+        <button type="submit" style="background-color: dodgerblue;width: 100%;" class="btn text-white text-uppercase fs-7" type="submit">Continue to Buy</button>
+    </div>
+    </form>
+    </div>
+    
+</div>
+
+<p id="rateDisplay"></p>
+<p id="quantityDisplay"></p>
+
+<!-- <div class="paymentopt">
+    <label for="">Payment method</label><br>
+    <div class="chopt" style="display: flex;">
+        <div class="content"> <input type="checkbox" name="" id="checkbox1" onclick="uncheckOthers('checkbox1')"> PAYPAL</div>
+         <img width="20" src="{% static 'user/images/coin/ETH.png' %}" alt="">
+     </div>
+
+    <div class="chopt" style="display: flex;">
+       <div class="content"> <input type="checkbox" name="" id="checkbox2" onclick="uncheckOthers('checkbox2')"> BANK TRANSFER</div>
+        <img width="20" src="{% static 'user/images/coin/ETH.png' %}" alt="">
+    </div>
+ </div> -->
+ 
+
+ 
+ <script>
+   // Get references to the input field, paragraph tags, and payment input field
+const inputField = document.getElementById('inputam');
+const rateSpan = document.getElementById('rate');
+const paymentSpan = document.getElementById('payment');
+const paymentInput = document.getElementById('paymentInput');
+
+// Add event listener to the input field to detect changes
+inputField.addEventListener('input', function() {
+    // Retrieve the value from the input field and the rate from the paragraph tag
+    const inputValue = parseFloat(inputField.value.replace(/[^\d.-]/g, '')); // Remove non-numeric characters
+    const rateValue = parseFloat(rateSpan.innerText.replace(/[^\d.-]/g, '')); // Remove non-numeric characters
+    
+    // Perform the multiplication
+    const payment = inputValue * rateValue;
+
+    // Update the content of the payment paragraph tag
+    paymentSpan.innerText = 'N' + payment.toFixed(2); // Assuming 2 decimal places for Naira
+
+    // Update the value of the payment input field
+    paymentInput.value = payment.toFixed(2); // Assuming 2 decimal places for Naira
+});
+
+
+    </script>
+    
+ {% else %}
+ <script type="text/javascript">
+     // Redirect to another page after 5 seconds
+     setTimeout(function() {
+         window.location.href = '/kyc';
+     }, 1); // 1000 milliseconds = 1 seconds
+ </script>
+ {% endif %}
+
+{% endblock %}

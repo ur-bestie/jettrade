@@ -1,0 +1,44 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    {% if x.paymentmethod.link %}
+  link
+    {% else %}
+    
+      <div class="paymentinfo">
+        <div class="top">
+            <h4 style="color: black;">Confirm your payment</h4>
+            {{ss}}
+            <p>safe and secure transaction</p>
+            <div class="top_content">
+                <h5 style="color: black;">Details</h5>
+                <div class="content">
+                    <h6>Business Type: </h6>
+                    <b>Buy</b>
+                </div>
+        <div class="content">
+            <h6>Date: </h6>
+            <b>{{x.buy_date}}</b>
+        </div>
+        <div class="content">
+            <h6>Payment:</h6>
+            <b>N{{x.payment}}</b>
+        </div>
+        <div class="content">
+            <h6>Payment To :</h6>
+            <b>{{x.paymentmethod.descripton}}</b>
+        </div>
+    </div>
+    <div class="btn">
+        <a href="/giftcardbuycancel/{{x.id}}" class="btn btn-cancel">Cancel Payment</a>
+        <a href="/giftcardbuyconfirm/{{x.id}}" class="btn" style="background-color: #2D2BA4;">Confirm Payment</a>
+    </div>
+        </div>
+      </div><br><br>
+    
+    {% endif %}
+</div>
+
+{% endblock %}

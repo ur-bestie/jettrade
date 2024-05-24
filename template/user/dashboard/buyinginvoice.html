@@ -1,0 +1,129 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'user/invoice/style.css' %}">
+
+<!-- Invoice 6 start -->
+<div class="invoice-6 invoice-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="invoice-inner clearfix">
+                    <div class="invoice-info clearfix" id="invoice_wrapper">
+                        <div class="invoice-headar">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="invoice-logo">
+                                        <!-- logo started -->
+                                        <div class="logo">
+                                            <span style="color: dodgerblue;">Crypto BUY</span>
+                                        </div>
+                                        <!-- logo ended -->
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="invoice-contant">
+                            <div class="invoice-top">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h1 class="invoice-name">Invoice</h1>
+                                    </div>
+                                    <div class="col-sm-6 mb-30">
+                                        <div class="invoice-number-inner">
+                                            <h3 class="name">Transaction ID:</h3>
+                                            <p class="mb-0"><span>{{x.invoice}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 mb-30">
+                                        <div class="invoice-number">
+                                            <h4 class="inv-title-1">Invoice To</h4>
+                                            <h2 class="name mb-10">{{user.first_name}} {{user.last_name}}</h2>
+                                            {% if x.status %}
+                                            <h6 style="color: yellow;"> status: Paid</h6>
+                                            {% else %}
+                                            <h6 style="color: red;"> status: Pending Not Yet confirmed</h6>
+                                            {% endif %}
+                                            <p>
+                                                {{user.email}} <br/>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 mb-30">
+                                        <div class="invoice-number">
+                                            <div class="invoice-number-inner">
+                                                <h4 class="inv-title-1">Invoice From</h4>
+                                                <h2 class="name mb-10">Jettrade</h2>
+                                                <p class="invo-addr-1 mb-0">
+                                                    
+                                                    Support@jettrade.com <br/>
+                                                   <br/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-center">
+                                <div class="order-summary">
+                                    <div class="table-outer">
+                                        <table class="default-table invoice-table">
+                                            <thead>
+                                            <tr>
+                                                <th>Coin Name</th>
+                                                <th>Amount</th>
+                                                <th>Rate in Naira</th>
+                                                <th>Payment</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            <tr>
+                                                <td>{{x.coin.name}}</td>
+                                                <td>N{{x.amount}}</td>
+                                                <td>N{{x.rate_naira}}</td>
+                                                <td>N{{x.payment}}</td>
+                                            </tr>
+                                           
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-bottom">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <div class="terms-conditions mb-30">
+                                           <h3 class="inv-title-1 mb-10">DateTime</h3>
+                                           
+                                                <strong>{{x.buy_date}}</strong>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div class="payment-method mb-30">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invoice-btn-section clearfix d-print-none">
+                        <a href="javascript:window.print()" class="btn btn-lg btn-print">
+                            <i class="fa fa-print"></i> Print Invoice
+                        </a>
+                        <a id="invoice_download_btn" class="btn btn-lg btn-download btn-theme">
+                            <i class="fa fa-download"></i> Download Invoice
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+<!-- Invoice 6 end -->
+
+{% endblock %}

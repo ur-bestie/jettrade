@@ -1,0 +1,70 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              {% if x %}
+                <h6 class="mb-0 fw-bold">Recent Transactions</h6> 
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="example" class="priceTable table table-hover custom-table-2 table-bordered align-middle mb-0" style="width:100%">
+                    
+                        <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Product</th>
+                          <th>Business type</th>
+                          <th>Amount</th>
+                          <th>Rate In Naira</th>
+                          <th>Status</th>
+                          <th>Confirm Payment</th>
+                          <th>Invoice</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {% for x in  x reversed %}
+                        <tr>
+                            <td>{{x.sell_date}}</td>
+                            <td><img src="{{x.coin.logo.url}}" alt="" class="img-fluid avatar mx-1">{{x.coin.name}}</td>
+                            <td><span class="color-price-down">Sell</span></td>
+                            <td>${{x.amount}}</td>
+                            <td>N{{x.rate_naira}}</td>
+                           
+                            {% if x.status %}
+                            <td> <button class="btn" style="background-color: dodgerblue;">Approved</button></td>
+                            <td><a href="#" class="btn " style="color: dodgerblue;">Payment Approved</a></td>
+                            {% else %}
+                        <td> <button class="btn btn-primary">Pending</button></td>
+                        <td><a href="/cryptosellpaymentinfo/{{x.id}}" class="btn btn-link" style="color: dodgerblue;">Confirm your payment</a></td>
+                            {% endif %}
+                            <td><a href="/sellinginvoice/{{x.id}}" class="btn btn-link" style="color: dodgerblue;">View Invoice</a></td>
+                        </tr>
+                       {% endfor %}
+                      
+                     
+                    </tbody>
+
+                  </table>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+              <h6 class="mb-0">No Transaction Yet</h6> 
+              {% endif %}
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+</div><br><br>
+
+{% endblock %}

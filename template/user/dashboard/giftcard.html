@@ -1,0 +1,50 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container mb-5">
+
+<div class="cryptoc">
+
+<div class="box">
+    <div class="boxcontent">
+        <div class="text">
+            <h6><b>I want to Buy Giftcard</b></h6>
+            <p>click buy and choose the giftcard you would like to buy</p>
+                </div>
+                <div class="img">
+                    <img src="{% static 'user/images/giftcard.png' %}" alt="">
+                </div>
+    </div>
+    <div class="btn">
+        <button style="background-color: dodgerblue;" class="btn text-white text-uppercase fs-7" type="submit">Buy</button>
+    </div>
+</div>
+
+
+
+<div class="box">
+    <div class="boxcontent">
+        <div class="text">
+            <h6><b>I want to sell Giftcard</b></h6>
+            <p>click sell and choose the giftcard you would like to sell</p>
+                </div>
+                <div class="img">
+                    <img src="{% static 'user/images/steam.png' %}" alt="">
+                </div>
+    </div>
+    <div class="btn">
+        <button style="background-color: dodgerblue;" class="btn text-white text-uppercase fs-7" type="submit">Sell</button>
+    </div>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

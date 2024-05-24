@@ -1,0 +1,80 @@
+{% load static %}
+{% include 'user/auth/top.html' %}
+
+
+ <!-- main @s -->
+ <div class="nk-main ">
+    <!-- wrap @s -->
+    <div class="nk-wrap nk-wrap-nosidebar">
+        <!-- content @s -->
+        <div class="nk-content ">
+            <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+                <div class="card card-bordered">
+                    <div class="card-inner card-inner-lg">
+                        <div class="nk-block-head">
+                            <div class="nk-block-head-content">
+                                <h4 class="nk-block-title">Register</h4>
+                                <div class="nk-block-des">
+                                    <p>Create New Jettrade Account</p>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <label class="form-label" for="name">FullName</label>
+                                <div class="form-control-wrap d-flex mb-5 gap-1">
+                                    <input type="text" required name="first_name" class="form-control form-control-lg" id="name" placeholder="Firstname">
+                                    <input type="text" required name="last_name" class="form-control form-control-lg" id="name" placeholder="Lastname">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="email">Username</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" required name="username" class="form-control form-control-lg" id="email" placeholder="Enter your username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email</label>
+                                <div class="form-control-wrap">
+                                    <input type="email" required name="email" class="form-control form-control-lg" id="email" placeholder="Enter your email address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="password">Password</label>
+                                <div class="form-control-wrap">
+                                   
+                                    <input type="password" required name="password" class="form-control form-control-lg" id="password" placeholder="Enter your passcode">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="password">Confirm password</label>
+                                <div class="form-control-wrap">
+                                   
+                                    <input type="password" required name="password2" class="form-control form-control-lg" id="password" placeholder="Enter your passcode">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-control-xs custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox">
+                                    <label class="custom-control-label" for="checkbox">I agree to Jettrade <a href="#" class="text-warning">Privacy Policy</a> &amp; <a href="#" class="text-warning"> Terms.</a></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg jettradebg btn-block">Register</button>
+                            </div>
+                        </form>
+                        <div class="form-note-s2 text-center pt-4"> Already have an account? <a href="/login"  class="text-warning"><strong>Sign in instead</strong></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- wrap @e -->
+    </div>
+    <!-- content @e -->
+</div>
+<!-- main @e -->
+
+
+
+{% include 'user/auth/buttom.html' %}

@@ -1,0 +1,85 @@
+{% extends 'admin_temp/base.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- content @s -->
+ <div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+<div class="card card-bordered card-preview">
+    <div class="card-inner">
+        <form action="" method="POST">
+            {% csrf_token %}
+        <div class="preview-block">
+            <span class="preview-title-lg overline-title">Settings</span>
+            <div class="row gy-4">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label" for="default-01">Crypto buying rate</label>
+                        <div class="form-control-wrap">
+                            <div class="form-text-hint">
+                                <span class="overline-title">NGN</span>
+                            </div>
+                            <input type="number" value="{{x.crypto_buying_rate}}" name="crypto_buying_rate" required class="form-control" id="default-05" placeholder="Crypto buying rate N">
+                        </div>
+                    </div>
+                </div>
+                <input type="text" name="sid" value="{{x.id}}" hidden>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label" for="default-05">Crypto selling rate</label>
+                        <div class="form-control-wrap">
+                            <div class="form-text-hint">
+                                <span class="overline-title">NGN</span>
+                            </div>
+                            <input type="number" value="{{x.crypto_selling_rate}}" name="crypto_selling_rate" required class="form-control" id="default-05" placeholder="Crypto selling rate N">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label" for="default-03">Giftcard buying rate</label>
+                        <div class="form-control-wrap">
+                            <div class="form-text-hint">
+                                <span class="overline-title">NGN</span>
+                            </div>
+                            <input type="number" value="{{x.giftcard_buying_rate}}" name="giftcard_buying_rate" required class="form-control" id="default-05" placeholder="Giftcard buying rate N">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="default-04">Giftcard selling rate</label>
+                        <div class="form-control-wrap">
+                            <div class="form-text-hint">
+                                <span class="overline-title">NGN</span>
+                            </div>
+                            <input type="number" value="{{x.giftcard_selling_rate}}" name="giftcard_selling_rate" required class="form-control" id="default-05" placeholder="Giftcard selling rate N">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label" for="default-04">Site Notification email</label>
+                        <div class="form-control-wrap">
+                            <div class="form-icon form-icon-right">
+                                <em class="icon ni ni-mail"></em>
+                            </div>
+                            <input type="email" value="{{x.siteemail}}" name="siteemail" required class="form-control" id="default-04" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+           
+            </div><br>
+            <button class="btn btn-primary text-center">Update</button>
+        </div>
+    </form>
+    </div>
+</div><!-- .card-preview -->    
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- content @e -->
+
+{% endblock %}

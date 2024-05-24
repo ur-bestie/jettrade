@@ -1,0 +1,69 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    {% if x.paymentmethod.link %}
+  link
+    {% else %}
+    
+      <div class="paymentinfo">
+        <div class="top">
+            <h4 style="color: black;">Confirm your sell</h4>
+            {{ss}}
+            <p>safe and secure transaction</p>
+            <div class="top_content">
+                <h5 style="color: black;">Details</h5>
+                <div class="content">
+                    <h6>Business Type: </h6>
+                    <b>Sell</b>
+                </div>
+        <div class="content">
+            <h6>Date: </h6>
+            <b>{{x.sell_date}}</b>
+        </div>
+        <div class="content">
+            <h6>Amount to Send:</h6>
+            <b>${{x.amount}}</b>
+        </div>
+        <div class="content">
+            <h6>Send {{x.coin.name}} To :</h6>
+            <b><input class="copyinput" id="inputId" readonly type="text" value="{{x.coin.wallet_address}}"> <button id="copyButton1" class="copy jettradebg">copy</button></b>
+        </div>
+        <div class="content">
+            <h6>Payment:</h6>
+            <b>N{{x.payment}}</b>
+        </div>
+        <div class="content">
+            <h6>Payment To :</h6>
+            <div class="">
+                <b>{{x.payment_info|linebreaksbr|urlize}}</b>
+            </div>
+        </div>
+    </div>
+    <div class="btn">
+        <a href="/cryptosellcancel/{{x.id}}" class="btn btn-cancel">Cancel Payment</a>
+        <a href="/cryptosellconfirm/{{x.id}}" class="btn" style="background-color: #2D2BA4;">Confirm Payment</a>
+    </div>
+        </div>
+      </div><br><br>
+    
+    {% endif %}
+</div>
+<script>
+    document.getElementById('copyButton1').addEventListener('click', function() {
+        // Get the input field
+        var copyText = document.getElementById('inputId');
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        document.execCommand('copy');
+
+        // Optionally, you can alert the copied text
+        alert('Copied the text: ' + copyText.value);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admin_temp/base.html' %}
+{% load static %}
+{% block content %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class=" container" >
+    <div class="nk-block-head">
+        <div class="nk-block-head-content">
+            <h5 class="nk-block-title">New Product</h5>
+            <div class="nk-block-des">
+                <p>Add information and add new product.</p>
+            </div>
+        </div>
+    </div><!-- .nk-block-head -->
+    <div class="nk-block">
+        <div class="row g-3">
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="form-label" for="product-title">Giftcard Name</label>
+                    <div class="form-control-wrap">
+                        <input type="text"name="name" value="{{x.name}}" class="form-control" id="product-title">
+                    </div>
+                </div>
+            </div>
+           
+           
+            <label class="form-label" for="category">Giftcard Logo</label>
+            <div class="col-12" style="background-color: gray;height: 10vh;padding: 1rem;">
+
+                        <input name="logo" required class="dz-message-text" type="file">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Update</span></button>
+            </div>
+        </div>
+    </div><!-- .nk-block -->
+</div>
+</form>
+
+{% endblock %}

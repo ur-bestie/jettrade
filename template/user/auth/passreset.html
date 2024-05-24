@@ -1,0 +1,83 @@
+{% load static %}
+{% include 'user/auth/top.html' %}
+
+
+
+<!-- main @s -->
+<div class="nk-main ">
+    <!-- wrap @s -->
+    <div class="nk-wrap nk-wrap-nosidebar">
+        <!-- content @s -->
+        <div class="nk-content ">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between g-3">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title"><strong class="text-primary small">{{x.user.first_name}} {{x.user.last_name}}</strong></h3>
+                        <div class="nk-block-des text-soft">
+                            
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content container">
+                        <a href="/user" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                        <a href="/user" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+                    </div>
+                </div>
+            </div><!-- .nk-block-head -->
+            <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
+                <div class="card card-bordered">
+                    <div class="card-inner card-inner-lg">
+                        <div class="nk-block-head">
+                            <div class="nk-block-head-content">
+                                <h4 class="nk-block-title">Update your password</h4>
+                               
+                            </div>
+                        </div>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <label class="form-label" for="default-01">Old password</label>
+                                </div>
+                                <div class="form-control-wrap">
+                                    <input type="password" name="old_password" required class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <label class="form-label" for="password">New Password</label>
+                                    
+                                </div>
+                                <div class="form-control-wrap">
+                                    
+                                    <input type="password" name="new_password" required class="form-control form-control-lg" id="password" placeholder="Enter your password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <label class="form-label" for="password">Confirm Password</label>
+                                    
+                                </div>
+                                <div class="form-control-wrap">
+                                   
+                                    <input type="password" name="confirm_password" required class="form-control form-control-lg" id="password" placeholder="Enter your password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg jettradebg btn-block">Sign in</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <!-- wrap @e -->
+    </div>
+    <!-- content @e -->
+</div>
+<!-- main @e -->
+
+
+
+{% include 'user/auth/buttom.html' %}

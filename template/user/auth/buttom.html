@@ -1,0 +1,32 @@
+{% load static %}
+     
+</div>
+</div>
+
+</div>
+
+</div>   
+
+<!-- Jquery Core Js -->
+   <script src="{% static 'user/libscripts.bundle.js' %}"></script>
+
+   <!-- Plugin Js -->
+   <script src="{% static 'user/dataTables.bundle.js' %}"></script>
+   <script src="{% static 'user/apexcharts.bundle.js' %}"></script>
+   
+   <!-- Jquery Page Js -->
+   <script src="../js/template.js"></script>
+   <script src="../js/page/index.js"></script>
+   <script>
+      {% if messages %}
+      {% for message in messages %}
+      swal({
+    title: "Good job!",
+    text: "{{message}}!",
+    icon: "{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% else %}info{% endif %}",
+    button: "ok",
+  });
+      {% endfor %}
+      {% endif %}
+</script>
+   </html>
