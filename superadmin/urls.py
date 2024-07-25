@@ -20,5 +20,6 @@ urlpatterns = [
     path('giftcardproductedit/<str:id>',views.giftcardproductedit,name='giftcardproductedit'),
     path('passwordchange',views.passwordchange,name='passwordchange'),
     path('adminsettings',views.adminsettings,name='adminsettings'),
+    path('deposit',views.deposit,name='deposit'),
 
 ]

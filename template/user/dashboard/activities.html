@@ -1,0 +1,87 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="card card-style" style="margin-bottom: 7rem;">
+    <div class="content">
+      {% for x in x %}
+      {% if x.name == 'bank funding' %}
+      <a href="/hvbhfdbv">
+      <div class="d-flex">
+    <div class="align-self-center">
+    <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
+    </div>
+    
+    <div class="align-self-center ps-1">
+    <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+    <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+    </div>
+    <div class="align-self-center ms-auto text-end">
+    <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+    <p class="mb-0 font-11">Bill Payment</p>
+    </div>
+    </div>
+    </a>
+    {% elif x.name == 'crypto purchase'  %}
+    <a href="/oiwwhdbv">
+      <div class="d-flex">
+    <div class="align-self-center">
+    <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
+    </div>
+    
+    <div class="align-self-center ps-1">
+    <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+    <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+    </div>
+    <div class="align-self-center ms-auto text-end">
+    <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+    <p class="mb-0 font-11">Bill Payment</p>
+    </div>
+    </div>
+    </a>
+    
+    {% elif x.name == 'crypto sell'  %}
+    <a href="/ommmjsj">
+      <div class="d-flex">
+    <div class="align-self-center">
+    <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
+    </div>
+    
+    <div class="align-self-center ps-1">
+    <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+    <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+    </div>
+    <div class="align-self-center ms-auto text-end">
+    <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+    <p class="mb-0 font-11">Bill Payment</p>
+    </div>
+    </div>
+    </a>
+    {% else %}
+    <a href="/vnbvdbvd">
+      <div class="d-flex">
+    <div class="align-self-center">
+    <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
+    </div>
+    
+    <div class="align-self-center ps-1">
+    <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+    <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+    </div>
+    <div class="align-self-center ms-auto text-end">
+    <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+    <p class="mb-0 font-11">Bill Payment</p>
+    </div>
+    </div>
+    </a>
+    {% endif %}
+    
+    {% endfor %}
+     
+    </div>
+    </div>
+
+{% endblock %}

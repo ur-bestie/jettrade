@@ -1,6 +1,9 @@
 {% load static %}
 {% include 'user/auth/top.html' %}
 
+{% for message in messages %}
+{{message}}
+{% endfor %}
 
  <!-- main @s -->
  <div class="nk-main ">

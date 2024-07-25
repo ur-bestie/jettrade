@@ -1,0 +1,120 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <title>Airtime and Data Purchase</title>
+</head>
+<body>
+    <!-- <div class="container">
+        <h1>Purchase Airtime or Data</h1>
+        <form id="purchase-form">
+            {% csrf_token %}
+            <label for="product">Product</label>
+            <select id="product" name="product_id">
+                {% for x in  x %}
+                    <option value="{{ x.id }}">{{ x.name }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="phone_number">Phone Number</label>
+            <input type="text" id="phone_number" name="phone_number" required>
+            
+            <label for="network_id">Network ID</label>
+            <input type="text" id="network_id" name="network_id" required>
+            
+            <label for="amount">Amount</label>
+            <input type="text" id="amount" name="amount" required>
+
+            <button type="submit">Purchase</button>
+        </form>
+        <div id="response-message"></div>
+    </div> -->
+   
+    <div class="card card-style">
+        <div class="content mb-0">
+        <div class="tabs tabs-pill" id="tab-group-2">
+        <div class="tab-controls rounded-m p-1 overflow-visible">
+        <a class="font-13 rounded-s py-1 shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-4" aria-expanded="true">Buy Airtime</a>
+        <a class="font-13 rounded-s py-1 shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-5" aria-expanded="false">Buy Data</a>
+        </div>
+        <div class="mt-3"></div>
+        
+        <div class="collapse show" id="tab-4" data-bs-parent="#tab-group-2">
+        
+            <form method="post" action="{% url 'purchase' %}">
+                {% csrf_token %}
+                 <div class="pt-3"></div>
+                <div class="form-custom form-label form-icon">
+                <i class="bi bi-bank font-13"></i>
+                 <select class="form-select rounded-xs" id="product" name="network_id">
+                <option value="0" disabled selected>Select Network</option>
+                {% for x in x %}
+                <option  value="{{x.pro_id}}" data-img="{{p.logo.url}}">{{x.name}}</option>
+                {% endfor %}
+                </select>
+                 </div>
+                <div class="pb-2"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-cash"></i>
+                <input  id="amount" name="amount" required type="number" step="0.01" class="form-control rounded-xs" id="c31" placeholder="Amount" />
+                <label for="c31" class="color-highlight form-label-always-">Amount</label>
+                <span>(required)</span>
+                </div>
+                <!-- <div class="am" style="display: flex;justify-content: space-between;padding: 10px;"><p>Rate In Naira: <span id="rate">{{sinfo.crypto_buying_rate}}</span></p>
+                    <div class="pamount">
+                        <p>Payment: <span id="payment">N0.00</span></p>
+                        <input type="hidden" name="payment" id="paymentInput">
+                        <input hidden type="number" name="rate_naira" value="{{sinfo.crypto_buying_rate}}">
+                    </div></div> -->
+                <div class="pb-2"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-phone"></i>
+                <input type="number" required  id="phone_number" name="phone_number" class="form-control rounded-xs" id="c32" placeholder="Phone Number" />
+                <label for="c32" class="color-highlight form-label-always-">Phone Number</label>
+                <span>(required)</span>
+                </div>  
+                <div class="pb-3"></div>
+                <button type="submit" class="btn w-100 btn-full gradient-green rounded-s shadow-bg shadow-bg-s mb-4">Buy Now</button>
+                
+            </form>
+        </div>
+
+        <div class="collapse" id="tab-5" data-bs-parent="#tab-group-2">
+            <div class="pt-3"></div>
+            <form method="post" action="{% url 'dataPurchase' %}">
+                {% csrf_token %}
+                 <div class="pt-3"></div>
+                <div class="form-custom form-label form-icon">
+                <i class="bi bi-bank font-13"></i>
+                 <select class="form-select rounded-xs" id="product" name="network_id">
+                <option value="0" disabled selected>Select Plan</option>
+                {% for d in d %}
+                <option  value="{{d.id}}" data-img="{{p.logo.url}}">{{d.name}}</option>
+                {% endfor %}
+                </select>
+                 </div>
+                <div class="pb-2"></div>
+
+               
+                <!-- <div class="am" style="display: flex;justify-content: space-between;padding: 10px;"><p>Rate In Naira: <span id="rate">{{sinfo.crypto_buying_rate}}</span></p>
+                    <div class="pamount">
+                        <p>Payment: <span id="payment">N0.00</span></p>
+                        <input type="hidden" name="payment" id="paymentInput">
+                        <input hidden type="number" name="rate_naira" value="{{sinfo.crypto_buying_rate}}">
+                    </div></div> -->
+                <div class="pb-2"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-phone"></i>
+                <input type="number" required  id="phone_number" name="phone_number" class="form-control rounded-xs" id="c32" placeholder="Phone Number" />
+                <label for="c32" class="color-highlight form-label-always-">Phone Number</label>
+                <span>(required)</span>
+                </div>  
+                <div class="pb-3"></div>
+                <button type="submit" class="btn w-100 btn-full gradient-green rounded-s shadow-bg shadow-bg-s mb-4">Buy Now</button>
+                
+            </form>
+        </div>
+
+        
+{% endblock %}

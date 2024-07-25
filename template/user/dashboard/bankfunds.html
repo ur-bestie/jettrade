@@ -1,0 +1,38 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="card card-style">
+    <div class="content mb-0">
+    <div class="tabs tabs-pill" id="tab-group-2">
+    <div class="tab-controls rounded-m p-1 overflow-visible">
+    <a class="font-13 w-100 bg-primary rounded-s py-1 shadow-bg shadow-bg-s">Bank deposit</a>
+     </div>
+    <div class="mt-3"></div>
+    
+    <div class="collapse show" id="tab-4" data-bs-parent="#tab-group-2">
+    
+        <form action="confirmbankdeposit" method="POST">
+            {% csrf_token %}
+              
+            <div class="pb-2"></div>
+            <div class="form-custom form-label form-icon">
+                <i class="bi bi-cash-stack font-14"></i>
+            <input name="amount" required type="number" class="form-control rounded-xs" id="c31" placeholder="Amount min: N100" />
+            <label for="c31" class="color-highlight form-label-always-">Amount To Deposit</label>
+            <span>(required)</span>
+            </div>
+               <div class="pb-3"></div>
+            <button type="submit" class="btn w-100 btn-full gradient-green rounded-s shadow-bg shadow-bg-s mb-4">Continue</button>
+            
+        </form>
+    </div>
+    
+   
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

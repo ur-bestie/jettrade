@@ -142,11 +142,40 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = ''
-EMAIL_PORT = ''
-EMAIL_USE_TLS =   # or False if you're using SSL
-EMAIL_USE_SSL = 
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST = 'smtp.hostinger.com'
+EMAIL_PORT = '465'
+EMAIL_USE_TLS = False  # or False if you're using SSL
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'test@kcls-swift.com'
+EMAIL_HOST_PASSWORD = 'THii33#o'
 
 
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = '587'
+# EMAIL_USE_TLS = True  # or False if you're using SSL
+# EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'itzpromiz@gmail.com'
+# EMAIL_HOST_PASSWORD = 'tzdg alvy fmiv jhkb'
+
+
+# settings.py
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
+
+# settings.py
+AIRTIME_API_KEY = 'aa62ff960278004dfd1ff70662b1e7ac615dd89c'

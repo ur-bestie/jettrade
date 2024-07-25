@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label class="form-label" for="product-title">Coin Name</label>
                     <div class="form-control-wrap">
-                        <input type="text"name="name" value="{{x.name}}" class="form-control" id="product-title">
+                        <input type="text"name="name" required value="{{x.name}}" class="form-control" id="product-title">
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label class="form-label" for="regular-price">Buying quantity per dollar</label>
                     <div class="form-control-wrap">
-                        <input type="" name="buying_quantity" value="{{x.buying_quantity}}" class="form-control" id="regular-price">
+                        <input type="" name="buying_quantity" required value="{{x.buying_quantity}}" class="form-control" id="regular-price">
                     </div>
                 </div>
             </div>
@@ -35,23 +35,23 @@
                 <div class="form-group">
                     <label class="form-label" for="sale-price">selling quantity per dollar</label>
                     <div class="form-control-wrap">
-                        <input type="" name="selling_quantity" value="{{x.selling_quantity}}" class="form-control" id="sale-price">
+                        <input type="" name="selling_quantity" required value="{{x.selling_quantity}}" class="form-control" id="sale-price">
                     </div>
                 </div>
             </div>
-           
+
             <div class="col-12">
                 <div class="form-group">
                     <label class="form-label" for="category">Wallet Address</label>
                     <div class="form-control-wrap">
-                        <input type="text" name="wallet_address" value="{{x.wallet_address}}" class="form-control" id="category">
+                        <input type="text" name="wallet_address" required value="{{x.wallet_address}}" class="form-control" id="category">
                     </div>
                 </div>
             </div>
             <label class="form-label" for="category">Coin Logo</label>
             <div class="col-12" style="background-color: gray;height: 10vh;padding: 1rem;">
 
-                        <input name="logo" required class="dz-message-text" type="file">
+                        <input name="logo" required value="{{x.logo}}" class="dz-message-text" type="file">
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Update</span></button>

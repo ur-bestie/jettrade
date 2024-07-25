@@ -1,0 +1,45 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container mb-5">
+{% if active.status %}
+<div class="row text-center">
+    <div class="col-6 mb-n2">
+    <a href="/confirmbankdeposit" class="card card-style me-0" style="height:180px">
+    <div class="card-center">
+    <span class="icon icon-xl shadow-bg shadow-bg-xs"><img src="{% static 'ui/images/bank.png' %}" width="60" alt=""></span>
+    <h1 class="font-15 pt-3">Bank</h1>
+    </div>
+    <div class="card-bottom">
+    <p class="font-11 mb-0 opacity-40">Bank transfer</p>
+    </div>
+    </a>
+    </div>
+
+    <div class="col-6 mb-n2">
+        <a href="#" class="card card-style me-0" style="height:180px">
+        <div class="card-center">
+        <span class="icon icon-xl shadow-bg shadow-bg-xs"><img src="{% static 'ui/images/flutterwave.png' %}" width="60" alt=""></span>
+        <h1 class="font-15 pt-3">Flutterwave</h1>
+        </div>
+        <div class="card-bottom">
+        <p class="font-11 mb-0 opacity-40">Card Payment</p>
+        </div>
+        </a>
+        </div>
+    </div>
+{% else %}
+<script type="text/javascript">
+    // Redirect to another page after 5 seconds
+    setTimeout(function() {
+        window.location.href = '/kyc';
+    }, 1); // 1000 milliseconds = 1 seconds
+</script>
+{% endif %}
+</div>
+
+
+{% endblock %}

@@ -6,12 +6,15 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.hashers import check_password
 from django.core.mail import send_mail
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
+@staff_member_required
 def dashboard(request):
     return render(request,'admin_temp/index.html')
 
+@staff_member_required
 def userkyc(request):
     x = Kycverification.objects.all()
     kcy_t = len(x)
@@ -20,13 +23,13 @@ def userkyc(request):
        sv = Kycverification.objects.get(pk=kycid)
        sv.status = True
        sv.save()
-       #email sell 
+       #email sell
        subject = "Kyc"
-       message = f""" 
+       message = f"""
  Hello {sv.user.username}, your kyc has been approved you can now buy or sell in the jettrade trading platform.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
        sender = "test@kcls-swift.com"
        receiver = [sv.user.email, ]
 
@@ -42,17 +45,18 @@ https://Jettrade.com.ng .Allright reserve 2024
        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
      return render(request,'admin_temp/userkyc.html', locals())
-    
+
+@staff_member_required
 def keycreject(request, id):
    x = Kycverification.objects.get(id=id)
    x.delete()
-   #email sell 
+   #email sell
    subject = "Kyc"
-   message = f""" 
+   message = f"""
  Hello {x.user.username}, your kyc has been rejected you can not buy or sell in the jettrade trading platform please do submit a valid information.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
    sender = "test@kcls-swift.com"
    receiver = [x.user.email, ]
 
@@ -67,10 +71,12 @@ https://Jettrade.com.ng .Allright reserve 2024
    messages.success(request,'kyc Rejected successfully')
    return redirect('/superadmin/userkyc')
 
+@staff_member_required
 def userkycview(request, id):
    x = Kycverification.objects.get(id=id)
    return render(request,'admin_temp/userkycview.html', locals())
 
+@staff_member_required
 def trancryptobuy(request):
    x = buying_history.objects.all()
    t_tal = len(buying_history.objects.all())
@@ -79,13 +85,13 @@ def trancryptobuy(request):
       sv = buying_history.objects.get(id=u_id)
       sv.status = True
       sv.save()
-      #email sell 
+      #email sell
       subject = "Crypto Transaction"
-      message = f""" 
+      message = f"""
  Hello {sv.user.username}, your Transaction on crypto purchase has been approved.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
       sender = "test@kcls-swift.com"
       receiver = [sv.user.email, ]
 
@@ -101,7 +107,8 @@ https://Jettrade.com.ng .Allright reserve 2024
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
    else:
     return render(request,'admin_temp/trancryptobuy.html', locals())
-   
+
+@staff_member_required
 def trancryptosell(request):
    x = selling_history.objects.all()
    t_tal = len(selling_history.objects.all())
@@ -110,13 +117,13 @@ def trancryptosell(request):
       sv = selling_history.objects.get(id=u_id)
       sv.status = True
       sv.save()
-      #email sell 
+      #email sell
       subject = "Crypto transaction"
-      message = f""" 
+      message = f"""
  Hello {sv.user.username}, the crypto you sold has been approved.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
       sender = "test@kcls-swift.com"
       receiver = [sv.user.email, ]
 
@@ -132,8 +139,8 @@ https://Jettrade.com.ng .Allright reserve 2024
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
    else:
     return render(request,'admin_temp/trancryptosell.html', locals())
-   
 
+@staff_member_required
 def trangiftbuy(request):
    x = giftcardbuying_history.objects.all()
    t_tal = len(giftcardbuying_history.objects.all())
@@ -142,13 +149,13 @@ def trangiftbuy(request):
       sv = giftcardbuying_history.objects.get(id=u_id)
       sv.status = True
       sv.save()
-      #email sell 
+      #email sell
       subject = "Giftcard transaction"
-      message = f""" 
+      message = f"""
  Hello {sv.user.username}, your Giftcard purchase has been approved.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
       sender = "test@kcls-swift.com"
       receiver = [sv.user.email, ]
 
@@ -164,18 +171,18 @@ https://Jettrade.com.ng .Allright reserve 2024
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
    else:
     return render(request,'admin_temp/trangiftbuy.html', locals())
-   
 
+@staff_member_required
 def trancryptobuydelete(request, id):
    x = buying_history.objects.get(id=id)
    x.delete()
-   #email sell 
+   #email sell
    subject = "Crypto transaction"
-   message = f""" 
+   message = f"""
  Hello {x.user.username}, your crypto purchase has been rejected please contact the admin.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
    sender = "test@kcls-swift.com"
    receiver = [x.user.email, ]
 
@@ -190,16 +197,17 @@ https://Jettrade.com.ng .Allright reserve 2024
    messages.success(request,'rejected successfully')
    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@staff_member_required
 def trancryptoselldelete(request, id):
    x = selling_history.objects.get(id=id)
    x.delete()
-   #email sell 
+   #email sell
    subject = "Crypto transaction"
-   message = f""" 
+   message = f"""
  Hello {x.user.username}, The crypto you sold has been rejected please contact the admin.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
    sender = "test@kcls-swift.com"
    receiver = [x.user.email, ]
 
@@ -214,16 +222,18 @@ https://Jettrade.com.ng .Allright reserve 2024
    messages.success(request,'rejected successfully')
    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+@staff_member_required
 def trangiftbuydelete(request, id):
    x = giftcardbuying_history.objects.get(id=id)
    x.delete()
-   #email sell 
+   #email sell
    subject = "Giftcard transaction"
-   message = f""" 
+   message = f"""
  Hello {x.user.username}, your Giftcard purchase has been rejected please contact the admin.
 https://Jettrade.com.ng .Allright reserve 2024
 """
-                           
+
    sender = "test@kcls-swift.com"
    receiver = [x.user.email, ]
 
@@ -243,6 +253,8 @@ def userpage(request):
    return render(request,'admin_temp/userpage.html', locals())
 
 
+
+@staff_member_required
 def cryptoproduct(request):
    x = coins.objects.all()
    if request.method == 'POST':
@@ -263,12 +275,15 @@ def cryptoproduct(request):
     return render(request,'admin_temp/cryptoproduct.html',locals())
 
 
+
+@staff_member_required
 def cryptoproductdel(request, id):
    x = coins.objects.get(id=id)
    x.delete()
    messages.success(request,'Coin deleted successfully')
    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@staff_member_required
 def cryptoproductedit(request, id):
    x = coins.objects.get(id=id)
    if request.method == 'POST':
@@ -277,7 +292,7 @@ def cryptoproductedit(request, id):
       wallet_address = request.POST.get('wallet_address')
       buying_quantity = request.POST.get('buying_quantity')
       selling_quantity = request.POST.get('selling_quantity')
-      
+
       x.name = name
       x.logo = logo
       x.wallet_address=wallet_address
@@ -291,6 +306,7 @@ def cryptoproductedit(request, id):
 
 
 
+@staff_member_required
 def giftcardproduct(request):
    x = giftcards.objects.all()
    if request.method == 'POST':
@@ -306,8 +322,9 @@ def giftcardproduct(request):
          return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
    else:
     return render(request,'admin_temp/giftcardproduct.html',locals())
-   
 
+
+@staff_member_required
 def giftcardproductdel(request, id):
    x = giftcards.objects.get(id=id)
    x.delete()
@@ -315,12 +332,13 @@ def giftcardproductdel(request, id):
    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@staff_member_required
 def giftcardproductedit(request, id):
    x = giftcards.objects.get(id=id)
    if request.method == 'POST':
       name = request.POST.get('name')
       logo = request.FILES.get('logo')
-      
+
       x.name = name
       x.logo = logo
       x.save()
@@ -330,6 +348,8 @@ def giftcardproductedit(request, id):
     return render(request,'admin_temp/giftcardproductedit.html',locals())
 
 
+
+@staff_member_required
 def passwordchange(request):
    if request.method == 'POST':
         old_password = request.POST.get('old_password')
@@ -351,15 +371,17 @@ def passwordchange(request):
         # Update the password
         user.set_password(new_password)
         user.save()
-        
+
         # Update session authentication hash
         update_session_auth_hash(request, user)
         messages.success(request, 'Password updated successfully.')
         return redirect('passwordchange')
-    
+
    return render(request,'admin_temp/passwordchange.html')
 
 
+
+@staff_member_required
 def adminsettings(request):
    x = setup.objects.filter().first
    if request.method == 'POST':
@@ -369,7 +391,7 @@ def adminsettings(request):
       giftcard_selling_rate = request.POST.get('giftcard_selling_rate')
       siteemail = request.POST.get('siteemail')
       sid = request.POST.get('sid')
- 
+
       ids = setup.objects.get(pk=sid)
       ids.crypto_buying_rate = crypto_buying_rate
       ids.crypto_selling_rate = crypto_selling_rate
@@ -382,5 +404,41 @@ def adminsettings(request):
 
    else:
     return render(request,'admin_temp/adminsettings.html',locals())
-   
 
+
+
+def deposit(request):
+   x = balance_history.objects.all()
+   t_tal = len(balance_history.objects.all())
+   if request.method == 'POST':
+      u_id = request.POST.get('u_id')
+      b_id = request.POST.get('b_id')
+      sv = balance_history.objects.get(id=u_id)
+      bid = balance.objects.get(id=b_id)
+      amount = sv.amount
+      sv.status = True
+      bid.amount += float(amount)
+      bid.save()
+      sv.save()
+      #email sell
+      subject = "Deposit transaction"
+      message = f"""
+ Hello {sv.balance.user.username}, your Deposit has been approved.
+https://Jettrade.com.ng .Allright reserve 2024
+"""
+
+      sender = "test@kcls-swift.com"
+      receiver = [sv.balance.user.email, ]
+
+
+      # send_mail(
+      #    subject,
+      #    message,
+      #    sender,
+      #    receiver,
+      #    fail_silently=False,
+      # )
+      messages.success(request,'Payment has been approved')
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+   else:
+    return render(request,'admin_temp/deposit.html',locals())

@@ -147,3 +147,63 @@ class giftcardbuying_history(models.Model):
     def __str__(self):
         return self.user.username
     
+class Network(models.Model):
+    name = models.CharField(max_length=100)
+    pro_id = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.name} - {self.name}"
+
+
+class airtime_Transaction(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
+    Network = models.ForeignKey(Network, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    number = models.IntegerField()
+    status = models.CharField(max_length=20)
+    transaction_id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(blank=True,null=True,default=timezone.now)
+
+    def __str__(self):
+        return self.Network.name
+    
+
+class balance(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
+    amount = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.user.first_name
+    
+
+class balance_history(models.Model):
+    balance = models.ForeignKey(balance, on_delete=models.CASCADE)
+    name = models.CharField(max_length=1000)
+    amount = models.IntegerField(default=0)
+    proof = models.FileField(upload_to='bproof/')
+    status = models.BooleanField(default=False)
+    date = models.DateTimeField(blank=True,null=True,default=timezone.now)
+
+class recent_activity(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100)
+    img = models.FileField(upload_to='ract/')
+    amount = models.IntegerField(default=0)
+    a_id = models.IntegerField()
+    date = models.DateTimeField(blank=True,null=True,default=timezone.now)
+
+
+class dataplan(models.Model):
+    Network = models.ForeignKey(Network, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    plan_id = models.IntegerField()
+    price = models.IntegerField()
+    
+    def __str__(self):
+        return self.Network.name
+    
+
+class datap_history(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
+    dataplan = models.ForeignKey(dataplan, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100)
