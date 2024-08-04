@@ -151,35 +151,38 @@ https://Jettrade.com.ng .Allright reserve 2024
 
 def addfunds(request):
     user = request.user
-    balance.objects.get_or_create(user=user)
-    return render(request,'user/dashboard/addfunds.html')
+    user_id = user.id
 
-def bankfunds(request):
-   
-    return render(request,'user/dashboard/bankfunds.html')
-
-def confirmbankdeposit(request):
-    user_id = request.user.id  # Get the user ID
-    bl = balance.objects.filter(user_id=user_id).first()  # Filter balance by user ID and get the first result
-    pm = paymentmethod.objects.all()
-    if bl is None:
-        messages.error(request, 'No balance record found for this user.')
-        return redirect('/addfunds')
-
-    balance_id = bl.id  # Get the balance ID
+    bl, created = balance.objects.get_or_create(user=user)
 
     if request.method == 'POST':
         amount = request.POST.get('amount')
-        proof = request.FILES.get('proof')
-        bk = paymentmethod.objects.filter().first()
 
-        x = balance_history.objects.create(balance_id=balance_id, amount=amount,name= 'bank deposit', proof=proof)
-        sid = x.id
-        ra = recent_activity.objects.create(user=request.user,name='bank funding',img=bk.logo,amount=amount,a_id=sid)  # Use balance_id directly
-        messages.success(request, 'Bank funding is successful. Wait for the admin approval.')
-        return redirect('/activities')
+        try:
+            amount = float(amount)
+            if amount <= 0:
+                raise ValueError("Amount must be greater than zero.")
+        except (ValueError, TypeError):
+            return render(request, 'user/dashboard/addfunds.html', {'error': 'Invalid amount.'})
+
+        
+        balance_history_obj = balance_history.objects.create(balance=bl, amount=amount)
+        # Get the ID of the newly created balance_history object
+        x = balance_history_obj.id
+        # Redirect to the payment page with the correct parameter name
+        return redirect(reverse('payment', kwargs={'id': x}))
     else:
-     return render(request,'user/dashboard/confirmbankdeposit.html',locals())
+         return render(request, 'user/dashboard/addfunds.html')
+    
+    
+def payment(request, id):
+    user = request.user
+    x = balance_history.objects.get(pk=id)
+    return render(request,'user/dashboard/payment.html',locals())
+
+def confirmbankdeposit(request):
+    
+     return render(request,'user/dashboard/test.html',locals())
 
 def giftcard(request):
     return render(request,'user/dashboard/giftcard.html')
@@ -370,6 +373,8 @@ def cryptosell(request):
        sv = selling_history.objects.create(
           user=user,coin=x_id,amount=amount,rate_naira=rate_naira,payment=payment,payment_info=payment_info
        )
+       sid = sv.id
+       ra = recent_activity.objects.create(user=request.user,name='crypto sell',img=x_id.logo,amount=amount,a_id=sid) 
        sv.save()
        messages.success(request,'you have made a new sale')
        #email sell 
@@ -393,7 +398,7 @@ def cryptosell(request):
       #       fail_silently=False,
       #   )
        selling_history_id = sv.id
-       return redirect('cryptosellpaymentinfo',selling_history_id=selling_history_id)
+       return redirect('activities')
     else:
      return render(request,'user/dashboard/cryptosell.html',locals())
 
@@ -404,14 +409,10 @@ def sellinginvoice(request, selling_history_id):
     return render(request,'user/dashboard/sellinginvoice.html', {'x': x})
 
 
-def selling_hist(request):
+def airtime_his(request, id):
    user = request.user
-   try:
-    x = selling_history.objects.filter(user=user)
-   except: 
-      selling_history.DoesNotExist
-      x = None
-   return render(request,'user/dashboard/selling_history.html',locals())
+   x = airtime_Transaction.objects.get(pk=id)
+   return render(request,'user/dashboard/airtime_his.html',locals())
 
 
 def buyinginvoice(request, buying_history_id):
@@ -419,16 +420,13 @@ def buyinginvoice(request, buying_history_id):
    return render(request,'user/dashboard/buyinginvoice.html',locals())
 
 
-def buying_hist(request):
-   user = request.user
-   try:
-    x = buying_history.objects.filter(user=user)
-   except: 
-      buying_history.DoesNotExist
-      x = None
-   return render(request,'user/dashboard/buying_history.html',locals())
+def data_his(request, id):
+   x = datap_history.objects.get(pk=id)
+   return render(request,'user/dashboard/data_his.html',locals())
 
 
+def marketplace(request):
+   return render(request,'user/dashboard/marketplace.html',locals())
 
 
 def giftcardbuy(request):
@@ -449,14 +447,14 @@ def giftcardbuy(request):
       
        x_id = giftcards.objects.get(pk=co_id)
        pg_id = paymentmethod.objects.get(pk=1)
-
+      
        if float(amount) > bl.amount:
          messages.error(request,'Amount is greater than your main balance')
          return redirect('/giftcardbuy')
        else:
         bl.amount -= float(amount)
         bl.save()
-
+       print(x_id.id)
        sv = giftcardbuying_history.objects.create(
           user=user,giftcard=x_id,amount=amount,rate_naira=rate_naira,recipient_name=recipient_name,recipient_whatsapp=recipient_whatsapp,payment=payment,paymentmethod=pg_id
        )
@@ -464,7 +462,7 @@ def giftcardbuy(request):
        ra = recent_activity.objects.create(user=request.user,name='Giftcard buy',img=x_id.logo,amount=amount,a_id=sid) 
        sv.save()
        #email sell 
-       subject = "Crypto Buy"
+       subject = "Giftcard Purchase"
        message = f""" 
  Hi {user.username}, you have successfully placed an order to buy giftcard worth {payment} please make sure you complate your payment, follow the information provided in your invoice page to complete this transaction.
 https://Jettrade.com.ng .Allright reserve 2024
@@ -483,7 +481,7 @@ https://Jettrade.com.ng .Allright reserve 2024
       #   )
        messages.success(request,'Crypto purchase is succesful make sure you complete your payment')
        buying_history_id = sv.id
-       return redirect('giftcardbuyconfirm',buying_history_id=buying_history_id)
+       return redirect('activities')
    else:
     return render(request,'user/dashboard/giftcardbuy.html',locals())
 
@@ -751,7 +749,7 @@ class PurchaseView(View):
                         sid = sv.id
                         ra = recent_activity.objects.create(
                         user=request.user,
-                        name='Giftcard buy',
+                        name='airtime purchase',
                         img=image_path,
                         amount=amount,
                         a_id=sid
@@ -780,94 +778,6 @@ class PurchaseView(View):
             messages.error(request, 'Internal server error')
             return redirect('airtimep')  # Replace with the actual URL name for the airtime page
 
-
-# class dataPurchaseView(View):
-#     def post(self, request):
-#         user_id = request.user.id  # Get the user ID
-#         bl = balance.objects.filter(user_id=user_id).first()
-#         try:
-#             phone_number = request.POST.get('phone_number')
-#             network_id = request.POST.get('network_id')
-            
-
-#             try:
-#                 product = dataplan.objects.get(id=network_id)
-#                 netw_id = product.Network.id
-#                 plan_id = product.plan_id
-#                 price = product.price
-#             except dataplan.DoesNotExist:
-#                 messages.error(request, 'Product not found')
-#                 return redirect('airtimep')  # Replace with the actual URL name for the airtime page
-
-#             if float(price) > bl.amount:
-#                 messages.error(request, 'Amount is greater than your main balance')
-#                 return redirect('airtimep')  # Replace with the actual URL name for the airtime page
-#             else:
-#                 api_url = 'https://payvtu.com/api/data/'
-#                 api_key = settings.AIRTIME_API_KEY
-
-#                 payload = {
-#                     'network': netw_id,
-#                     'plan': plan_id,
-#                     'mobile_number': phone_number,
-#                     'Ported_number': True,
-                    
-#                 }
-#                 headers = {
-#                     'Authorization': f'Token {api_key}',
-#                     'Content-Type': 'application/json'
-#                 }
-
-#                 logger.debug(f"Request payload: {payload}")
-#                 response = requests.post(api_url, json=payload, headers=headers)
-#                 response_data = response.json()
-#                 logger.debug(f"Response status code: {response.status_code}")
-#                 logger.debug(f"Response data: {response_data}")
-
-#                 if response.status_code == 201:
-#                     transaction_status = response_data.get('Status', 'failed')
-#                     if transaction_status.lower() == 'successful':
-#                         bl.amount -= float(price)
-#                         bl.save()
-#                         image_path = static('ui/images/airtime.svg')
-#                         sv = airtime_Transaction.objects.create(
-#                             user=request.user,
-#                             Network=product,
-#                             amount=price,
-#                             number=phone_number,
-#                             status='successful',
-#                         )
-#                         sid = sv.id
-#                         ra = recent_activity.objects.create(
-#                         user=request.user,
-#                         name='Giftcard buy',
-#                         img=image_path,
-#                         amount=price,
-#                         a_id=sid
-#                         )
-#                         sv.save()
-#                         logger.info(f"Transaction successful: {response_data}")
-#                         messages.success(request, 'Data Purchase is successfully')
-#                         return redirect('activities')  # Replace with the actual URL name for the transaction history page
-#                     else:
-#                         logger.error(f"Transaction failed: {response_data}")
-#                         airtime_Transaction.objects.create(
-#                             user=request.user,
-#                             Network=product,
-#                             amount=price,
-#                             number=phone_number,
-#                             status='failed',
-#                         )
-#                         messages.error(request, response_data.get('message', 'Transaction failed'))
-#                         return redirect('airtimep')  # Replace with the actual URL name for the airtime page
-#                 else:
-#                     logger.error(f"API error: {response_data}")
-#                     messages.error(request, response_data.get('message', 'Failed to process transaction'))
-#                     return redirect('airtimep')  # Replace with the actual URL name for the airtime page
-#         except Exception as e:
-#             logger.error(f"Error processing request: {e}")
-#             messages.error(request, 'Internal server error')
-#             return redirect('airtimep')  # Replace with the actual URL name for the airtime page
 
 
 
@@ -942,6 +852,29 @@ class dataPurchaseView(View):
 def bankhist(request, id):
    x = balance_history.objects.get(pk=id)
    return render(request, 'user/dashboard/bankhist.html',locals())
+
+
+def autodep(request, id):
+   user = request.user
+   x = balance_history.objects.get(pk=id)
+   user_id = request.user.id
+   bl = balance.objects.filter(user_id=user_id).first()
+   if x.status == True:
+      return redirect('activities')
+   else:
+    x.status = True
+    ba = x.amount
+    bl.amount += ba
+    bl.save()
+    x.save()
+    messages.success(request, 'account funded successfully')
+   return redirect('activities')
+
+def autodel(request, id):
+   x = balance_history.objects.get(pk=id)
+   x.delete()
+   messages.success(request, 'Deposit cancelled successfully successfully')
+   return redirect('activities')
 
 # def forgetpassword(request):
 #    return render(request,'user/auth/forgetpassword.html')

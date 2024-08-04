@@ -1,10 +1,9 @@
 {% extends 'user/base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'user/invoice/style.css' %}">
 
 <!-- Invoice 6 start -->
-<div class="invoice-6 invoice-content bg-transparent">
+<div class="invoice-6 invoice-content">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -16,12 +15,12 @@
                                     <div class="invoice-logo">
                                         <!-- logo started -->
                                         <div class="logo">
-                                            <span style="color: gold;">Crypto SELL</span>
+                                            <span style="color: dodgerblue;">airtime purchase</span>
                                         </div>
                                         <!-- logo ended -->
                                     </div>
                                 </div>
-                               
+                                
                             </div>
                         </div>
                         <div class="invoice-contant">
@@ -30,20 +29,20 @@
                                     <div class="col-sm-6">
                                         <h1 class="invoice-name">Invoice</h1>
                                     </div>
-                                    <div class="col-sm-6 mb-30">
+                                    <!-- <div class="col-sm-6 mb-30">
                                         <div class="invoice-number-inner">
                                             <h3 class="name">Transaction ID:</h3>
                                             <p class="mb-0"><span>{{x.invoice}}</span></p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-sm-6 mb-30">
                                         <div class="invoice-number">
                                             <h4 class="inv-title-1">Invoice To</h4>
                                             <h2 class="name mb-10">{{user.first_name}} {{user.last_name}}</h2>
                                             {% if x.status %}
-                                            <h6 style="color: yellow;"> status: Paid</h6>
+                                            <h4 style="color: green;"> status: successful</h4>
                                             {% else %}
-                                            <h6 style="color: red;"> status: Pending Not Yet confirmed</h6>
+                                            <h4 style="color: red;"> status: unsuccessful</h4>
                                             {% endif %}
                                             <p>
                                                 {{user.email}} <br/>
@@ -72,19 +71,23 @@
                                         <table class="default-table invoice-table">
                                             <thead>
                                             <tr>
-                                                <th>Coin Name</th>
+                                                <th>Deposit type</th>
                                                 <th>Amount</th>
-                                                <th>Rate in Naira</th>
-                                                <th>Payment</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
                                             </tr>
                                             </thead>
 
                                             <tbody>
                                             <tr>
-                                                <td>{{x.coin.name}}</td>
-                                                <td>$<span id="amount">{{x.amount}}</span></td>
-                                                <td>N{{x.rate_naira}}</td>
-                                                <td>N{{x.payment}}</td>
+                                                <td>airtime purchase</td>
+                                                <td>{{x.amount}}</td>
+                                                {% if x.status %}
+                                                <td>successful</td>
+                                                {% else %}
+                                                <td>unsuccessful</td>
+                                                {% endif %}
+                                                <td>{{x.date}}</td>
                                             </tr>
                                            
                                             </tbody>
@@ -96,18 +99,13 @@
                                 <div class="row">
                                     <div class="col-lg-7 col-md-7 col-sm-7">
                                         <div class="terms-conditions mb-30">
-                                            <h3 class="inv-title-1 mb-10">Bank Info</h3>
-                                            <p>Your money will be sent to this if the above is confirmed</p>
-                                            {{x.payment_info|linebreaksbr|urlize}}
+                                           <h3 class="inv-title-1 mb-10"></h3>
+                                              
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5">
                                         <div class="payment-method mb-30">
-                                            <h3 class="inv-title-1 mb-10">DateTime</h3>
-                                            <ul class="payment-method-list-1 text-14">
-                                                <li><strong>{{x.sell_date}}</strong></li>
-                                                
-                                            </ul>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -115,10 +113,10 @@
                         </div>
                     </div>
                     <div class="invoice-btn-section clearfix d-print-none">
-                        <a href="javascript:window.print()" class="btn btn-lg btn-print">
+                        <a href="javascript:window.print()" class="btn btn-primary mb-2 btn-print">
                             <i class="fa fa-print"></i> Print Invoice
                         </a>
-                        <a id="invoice_download_btn" class="btn btn-lg btn-download btn-theme">
+                        <a id="invoice_download_btn" class="btn btn-info mb-2 btn-download btn-theme">
                             <i class="fa fa-download"></i> Download Invoice
                         </a>
                     </div>
@@ -128,21 +126,6 @@
     </div>
 </div><br><br>
 <!-- Invoice 6 end -->
-<script>
-    // Get the elements by their IDs
-var amountElement = document.getElementById('amount');
-var quantityElement = document.getElementById('quantity');
-var resultElement = document.getElementById('result');
 
-// Get the values from the elements
-var amount = parseFloat(amountElement.textContent);
-var quantity = parseFloat(quantityElement.textContent);
 
-// Calculate the result
-var result = amount * quantity;
-
-// Update the content of the result element
-resultElement.textContent = result.toFixed(4); // Displaying result with 2 decimal places
-
-</script>
 {% endblock %}

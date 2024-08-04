@@ -1,0 +1,84 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="row text-center mt-5">
+  <div class="col-6 mb-n1">
+  <a href="/cryptobuy" class="card card-style me-0" style="height:180px">
+  <div class="card-center">
+  <span class="icon icon-xl rounded-m gradient-green shadow-bg shadow-bg-xs"><i class="bi bi-graph-up-arrow font-24 color-white"></i></span>
+  <h1 class="font-15 pt-3">Buy crypto</h1>
+  </div>
+  <div class="card-bottom">
+  <p class="font-11 mb-0 opacity-40">crypto purchase</p>
+  </div>
+  </a>
+  </div>
+  <div class="col-6 mb-n1">
+  <a href="/cryptobuy#tab-5" class="card card-style ms-0" style="height:180px">
+  <div class="card-center">
+  <span class="icon icon-xl rounded-m gradient-orange shadow-bg shadow-bg-xs"><i class="bi bi-graph-down font-24 color-white"></i></span>
+  <h1 class="font-15 pt-3">Sell crypto</h1>
+  </div>
+  <div class="card-bottom">
+  <p class="font-11 mb-0 opacity-40">Crypto to cash</p>
+  </div>
+  </a>
+  </div>
+  <div class="col-6 mb-n1">
+  <a href="/giftcardbuy" class="card card-style me-0" style="height:180px">
+  <div class="card-center">
+  <span class="icon icon-xl rounded-m gradient-yellow shadow-bg shadow-bg-xs"><i class="bi bi-graph-up font-24 color-white"></i></span>
+  <h1 class="font-15 pt-3">Buy Giftcard</h1>
+  </div>
+  <div class="card-bottom">
+  <p class="font-11 mb-0 opacity-40">Request for a Giftcard</p>
+  </div>
+  </a>
+  </div>
+  <div class="col-6 mb-n1">
+  <a href="#" class="card card-style ms-0" style="height:180px">
+  <div class="card-center">
+  <span class="icon icon-xl rounded-m gradient-blue shadow-bg shadow-bg-xs"><i class="bi bi-graph-down font-24 color-white"></i></span>
+  <h1 class="font-15 pt-3">Sell Giftcard</h1>
+  </div>
+  <div class="card-bottom">
+  <p class="font-11 mb-0 opacity-40">Trade giftcard</p>
+  </div>
+  </a>
+  </div>
+</div>
+<div class="row text-center">
+  <div class="col-6 mb-n1">
+    <a href="/airtimep" class="card card-style me-0" style="height:180px">
+    <div class="card-center">
+    <span class="icon icon-xl rounded-m gradient-yellow shadow-bg shadow-bg-xs"><img src="{% static 'ui/images/airtime.svg' %}" alt=""></span>
+    <h1 class="font-15 pt-3">Airtime Topup</h1>
+    </div>
+    <div class="card-bottom">
+    <p class="font-11 mb-0 opacity-40">Request for airtime</p>
+    </div>
+    </a>
+    </div>
+    <div class="col-6 mb-n1">
+    <a href="#" class="card card-style ms-0" style="height:180px">
+    <div class="card-center">
+    <span class="icon icon-xl rounded-m gradient-blue shadow-bg shadow-bg-xs"><img src="{% static 'ui/images/data.jpg' %}" width="60" alt=""></span>
+    <h1 class="font-15 pt-3">Buy Data</h1>
+    </div>
+    <div class="card-bottom">
+    <p class="font-11 mb-0 opacity-40">Buy or Send Data</p>
+    </div>
+    </a>
+    </div>
+</div>
+  
+  </div>
+
+
+{% endblock %}
+
+

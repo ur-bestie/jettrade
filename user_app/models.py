@@ -172,15 +172,13 @@ class balance(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
     amount = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.user.first_name
+    # def __str__(self):
+    #     return self.user.username
     
 
 class balance_history(models.Model):
     balance = models.ForeignKey(balance, on_delete=models.CASCADE)
-    name = models.CharField(max_length=1000)
     amount = models.IntegerField(default=0)
-    proof = models.FileField(upload_to='bproof/')
     status = models.BooleanField(default=False)
     date = models.DateTimeField(blank=True,null=True,default=timezone.now)
 
@@ -191,7 +189,9 @@ class recent_activity(models.Model):
     amount = models.IntegerField(default=0)
     a_id = models.IntegerField()
     date = models.DateTimeField(blank=True,null=True,default=timezone.now)
-
+     
+    def __str__(self):
+        return self.name
 
 class dataplan(models.Model):
     Network = models.ForeignKey(Network, on_delete=models.CASCADE)
@@ -207,3 +207,4 @@ class datap_history(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
     dataplan = models.ForeignKey(dataplan, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
+    date = models.DateTimeField(blank=True,null=True,default=timezone.now)

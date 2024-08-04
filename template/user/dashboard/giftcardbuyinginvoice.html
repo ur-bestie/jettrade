@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'user/invoice/style.css' %}">
 
 <!-- Invoice 6 start -->
-<div class="invoice-6 invoice-content">
+<div class="invoice-6 invoice-content bg-transparent">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -44,7 +44,7 @@
                                             {% if x.status %}
                                             <h6 style="color: yellow;"> status: Paid</h6>
                                             {% else %}
-                                            <h6 style="color: red;"> status: Pending Not Yet confirmed</h6>
+                                            <h6 style="color: red;"> status: Pending Transaction</h6>
                                             {% endif %}
                                             <p>
                                                 {{user.email}} <br/>
@@ -83,7 +83,7 @@
                                             <tbody>
                                             <tr>
                                                 <td>{{x.giftcard.name}}</td>
-                                                <td>N{{x.amount}}</td>
+                                                <td>${{x.amount}}</td>
                                                 <td>N{{x.rate_naira}}</td>
                                                 <td>N{{x.payment}}</td>
                                             </tr>

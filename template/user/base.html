@@ -489,7 +489,7 @@
                 <a href="/addfunds"><i class="bi bi-wallet2"></i><span>Add funds</span></a>
                 <a href="/activities"><i class="bi bi-graph-up"></i><span>Activity</span></a>
                 <a href="/user" class="circle-nav-2"><i class="bi bi-house-fill"></i><span>Home</span></a>
-                <a href=""><i class="bi bi-receipt"></i><span>Market place</span></a>
+                <a href="/marketplace"><i class="bi bi-receipt"></i><span>Market place</span></a>
                 <a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-sidebar"><i class="bi bi-three-dots"></i><span>More</span></a>
                 </div>
                 
@@ -504,10 +504,11 @@
                 </div>
                 <div class="align-self-center ms-auto">
                 
-                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-notifications" class="icon bg-white color-theme rounded-m shadow-xl">
-                <i class="bi bi-bell-fill color-black font-17"></i>
-                <em class="badge bg-red-light color-white scale-box">3</em>
+                <a href="#"  data-toggle-theme data-trigger-switch="switch-1" class="icon bg-transparent color-theme rounded-m shadow-xl">
+                    <i class="bi bi-moon-stars-fill"></i>
+                <em class="badge bg-red-light color-white scale-box"></em>
                 </a>
+
                 <a href="#" data-bs-toggle="dropdown" class="icon rounded-m shadow-xl">
                 <img src="{% static 'ui/images/pictures/25s.jpg' %}" width="45" class="rounded-m" alt="img">
                 </a>
@@ -515,19 +516,19 @@
                 <div class="dropdown-menu">
                 <div class="card card-style shadow-m mt-1 me-1">
                 <div class="list-group list-custom list-group-s list-group-flush rounded-xs px-3 py-1">
-                <a href="page-wallet.html" class="list-group-item">
+                <a href="/kyc" class="list-group-item">
                 <i class="has-bg gradient-green shadow-bg shadow-bg-xs color-white rounded-xs bi bi-credit-card"></i>
-                <strong class="font-13">Wallet</strong>
+                <strong class="font-13">Verification</strong>
                 </a>
                 <a href="/activities" class="list-group-item">
                 <i class="has-bg gradient-blue shadow-bg shadow-bg-xs color-white rounded-xs bi bi-graph-up"></i>
                 <strong class="font-13">Activity</strong>
                 </a>
-                <a href="page-profile.html" class="list-group-item">
+                <a href="/profile" class="list-group-item">
                 <i class="has-bg gradient-yellow shadow-bg shadow-bg-xs color-white rounded-xs bi bi-person-circle"></i>
-                <strong class="font-13">Account</strong>
+                <strong class="font-13">Profile</strong>
                 </a>
-                <a href="page-signin-1.html" class="list-group-item">
+                <a href="/logout" class="list-group-item">
                 <i class="has-bg gradient-red shadow-bg shadow-bg-xs color-white rounded-xs bi bi-power"></i>
                 <strong class="font-13">Log Out</strong>
                 </a>
@@ -713,7 +714,7 @@
                     
                     <div id="menu-highlights" data-menu-load="menu-highlights.html" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
                     </div>
-                    <div class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" id="menu-install-pwa-ios">
+                    <!-- <div class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" id="menu-install-pwa-ios">
                     <div class="content">
                     <img src="{% static 'ui/app/icons/icon-128x128.png' %}" alt="img" width="80" class="rounded-m mx-auto my-4">
                     <h1 class="text-center">Install PayApp</h1>
@@ -733,7 +734,7 @@
                     <a href="#" class="pwa-install btn btn-m rounded-s text-uppercase font-900 gradient-highlight shadow-bg shadow-bg-s btn-full">Add to Home Screen</a><br>
                     <a href="#" data-bs-dismiss="offcanvas" class="pwa-dismiss close-menu color-theme text-uppercase font-900 opacity-60 font-11 text-center d-block mt-n1">Maybe later</a>
                     </div>
-                    </div>
+                    </div> -->
                     </div>
                     
                     <script src="{% static 'ui/scripts/bootstrap.min.js' %}"></script>

@@ -40,11 +40,7 @@
                                         <div class="invoice-number">
                                             <h4 class="inv-title-1">Invoice To</h4>
                                             <h2 class="name mb-10">{{user.first_name}} {{user.last_name}}</h2>
-                                            {% if x.status %}
-                                            <h6 style="color: yellow;"> status: Paid</h6>
-                                            {% else %}
-                                            <h6 style="color: red;"> status: Pending Not Yet confirmed</h6>
-                                            {% endif %}
+                                           
                                             <p>
                                                 {{user.email}} <br/>
                                                 <br/>
@@ -82,7 +78,7 @@
                                             <tbody>
                                             <tr>
                                                 <td>{{x.coin.name}}</td>
-                                                <td>N{{x.amount}}</td>
+                                                <td>${{x.amount}}</td>
                                                 <td>N{{x.rate_naira}}</td>
                                                 <td>N{{x.payment}}</td>
                                             </tr>
