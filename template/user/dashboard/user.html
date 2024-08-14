@@ -544,82 +544,139 @@
 
 
 <div class="card card-style" style="margin-bottom: 7rem;">
-<div class="content">
-  {% for x in x %}
-  {% if x.name == 'bank funding' %}
-  <a href="/bankhist/{{x.a_id}}">
-  <div class="d-flex">
-<div class="align-self-center">
-<span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
-</div>
-
-<div class="align-self-center ps-1">
-<h5 class="pt-1 mb-n1">{{x.name}}</h5>
-<p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
-</div>
-<div class="align-self-center ms-auto text-end">
-<h4 class="pt-1 mb-n1 color-green-dark">+N{{x.amount}}</h4>
-<p class="mb-0 font-11">Deposit</p>
-</div>
-</div>
-</a>
-{% elif x.name == 'crypto buy'  %}
-<a href="/cryptobuy_his/{{x.a.id}}">
-  <div class="d-flex">
-<div class="align-self-center">
-<span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
-</div>
-
-<div class="align-self-center ps-1">
-<h5 class="pt-1 mb-n1">{{x.name}}</h5>
-<p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
-</div>
-<div class="align-self-center ms-auto text-end">
-<h4 class="pt-1 mb-n1 color-yellow-dark">-N{{x.amount}}</h4>
-<p class="mb-0 font-11">Purchase</p>
-</div>
-</div>
-</a>
-
-{% elif x.name == 'crypto sell'  %}
-<a href="/ommmjsj">
-  <div class="d-flex">
-<div class="align-self-center">
-<span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
-</div>
-
-<div class="align-self-center ps-1">
-<h5 class="pt-1 mb-n1">{{x.name}}</h5>
-<p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
-</div>
-<div class="align-self-center ms-auto text-end">
-<h4 class="pt-1 mb-n1 color-red-dark">-N{{x.amount}}</h4>
-<p class="mb-0 font-11">Payment</p>
-</div>
-</div>
-</a>
-{% else %}
-<a href="/vnbvdbvd">
-  <div class="d-flex">
-<div class="align-self-center">
-<span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{{x.img.url}}" width="40" alt=""></span>
-</div>
-
-<div class="align-self-center ps-1">
-<h5 class="pt-1 mb-n1">{{x.name}}</h5>
-<p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
-</div>
-<div class="align-self-center ms-auto text-end">
-<h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
-<p class="mb-0 font-11">Bill Payment</p>
-</div>
-</div>
-</a>
-{% endif %}
-<div class="divider my-2 opacity-50"></div>
-{% endfor %}
-</div>
-</div>
+  <div class="content">
+    {% for x in x reversed %}
+    {% if x.name == 'Flutterwave deposit' %}
+    <a href="/bankhist/{{x.a_id}}">
+    <div class="d-flex">
+  <div class="align-self-center">
+  <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{% static 'ui/images/flutterwave.png' %}" width="40" alt=""></span>
+  </div>
+  
+  <div class="align-self-center ps-1">
+  <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+  <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+  </div>
+  <div class="align-self-center ms-auto text-end">
+  <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+  <p class="mb-0 font-11">Bill Payment</p>
+  </div>
+  </div>
+  </a>
+  <div class="pb-3"></div>
+   {% elif x.name == 'crypto buy'  %}
+  <a href="/buyinginvoice/{{x.a_id}}">
+    <div class="d-flex">
+  <div class="align-self-center">
+  <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{% static 'ui/images/pictures/8s.jpg' %}" width="40" alt=""></span>
+  </div>
+  
+  <div class="align-self-center ps-1">
+  <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+  <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+  </div>
+  <div class="align-self-center ms-auto text-end">
+  <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+  <p class="mb-0 font-11">Bill Payment</p>
+  </div>
+  </div>
+  </a>
+  <div class="pb-3"></div>
+  {% elif x.name == 'crypto sell'  %}
+  <a href="/sellinginvoice/{{x.a_id}}">
+    <div class="d-flex">
+  <div class="align-self-center">
+  <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{% static 'ui/images/pictures/8s.jpg' %}" width="40" alt=""></span>
+  </div>
+  
+  <div class="align-self-center ps-1">
+  <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+  <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+  </div>
+  <div class="align-self-center ms-auto text-end">
+  <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+  <p class="mb-0 font-11">Bill Payment</p>
+  </div>
+  </div>
+  </a>
+  <div class="pb-3"></div>
+  {% elif x.name == 'Giftcard buy'  %}
+  <a href="/giftcardbuyinginvoice/{{x.a_id}}">
+    <div class="d-flex">
+  <div class="align-self-center">
+  <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{% static 'user/images/gift-card.png' %}" width="40" alt=""></span>
+  </div>
+  
+  <div class="align-self-center ps-1">
+  <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+  <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+  </div>
+  <div class="align-self-center ms-auto text-end">
+  <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+  <p class="mb-0 font-11">Bill Payment</p>
+  </div>
+  </div>
+  </a>
+  <div class="pb-3"></div>
+  {% elif x.name == 'airtime purchase'  %}
+  <a href="/airtime_his/{{x.a_id}}">
+    <div class="d-flex">
+  <div class="align-self-center">
+  <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{% static 'ui/images/airtime.svg' %}" width="40" alt=""></span>
+  </div>
+  
+  <div class="align-self-center ps-1">
+  <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+  <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+  </div>
+  <div class="align-self-center ms-auto text-end">
+  <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+  <p class="mb-0 font-11">Bill Payment</p>
+  </div>
+  </div>
+  </a>
+  <div class="pb-3"></div>
+  {% elif x.name == 'withdrawal'  %}
+  <a href="/withhis/{{x.a_id}}">
+    <div class="d-flex">
+  <div class="align-self-center">
+  <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{% static 'ui/images/bank.png' %}" width="40" alt=""></span>
+  </div>
+  
+  <div class="align-self-center ps-1">
+  <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+  <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+  </div>
+  <div class="align-self-center ms-auto text-end">
+  <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+  <p class="mb-0 font-11">Bill Payment</p>
+  </div>
+  </div>
+  </a>
+  <div class="pb-3"></div>
+  {% else %}
+  <a href="/data_his/{{x.a_id}}">
+    <div class="d-flex">
+  <div class="align-self-center">
+  <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-s"><img src="{% static 'ui/images/data.jpg' %}" width="40" alt=""></span>
+  </div>
+  
+  <div class="align-self-center ps-1">
+  <h5 class="pt-1 mb-n1">{{x.name}}</h5>
+  <p class="mb-0 font-11 opacity-50">{{x.date}} <span class="copyright-year"></span></p>
+  </div>
+  <div class="align-self-center ms-auto text-end">
+  <h4 class="pt-1 mb-n1 color-red-dark">N{{x.amount}}</h4>
+  <p class="mb-0 font-11">Bill Payment</p>
+  </div>
+  </div>
+  </a>
+  {% endif %}
+  
+  {% endfor %}
+   
+  </div>
+  </div>
 
 
 

@@ -20,6 +20,7 @@
                             </div>
                         </div>
                         <form action="" method="POST">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label class="form-label" for="name">FullName</label>
                                 <div class="form-control-wrap d-flex mb-5 gap-1">

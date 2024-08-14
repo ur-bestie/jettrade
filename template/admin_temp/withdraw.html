@@ -10,11 +10,12 @@
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-between g-3">
                         <div class="nk-block-head-content">
-                            <h3 class="nk-block-title page-title">Deposit Transaction</h3>
+                            <h3 class="nk-block-title page-title">withdrawal Transaction</h3>
                             <div class="nk-block-des text-soft">
-                                <p>You have {{t_tal}} total Deposit.</p>
+                                <p>You have total {{t_tal}} orders.</p>
                             </div>
                         </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
 
                     </div><!-- .nk-block-between -->
                 </div><!-- .nk-block-head -->
@@ -33,7 +34,6 @@
                                             </li><!-- li -->
                                             <li class="btn-toolbar-sep"></li><!-- li -->
 
-
                                         </ul><!-- .btn-toolbar -->
                                     </div><!-- .card-tools -->
                                     <div class="card-search search-wrap" data-search="search">
@@ -50,9 +50,9 @@
                                     <div class="nk-tb-item nk-tb-head">
                                         <div class="nk-tb-col"><span>Details</span></div>
                                         <div class="nk-tb-col tb-col-xxl"><span>Source</span></div>
-                                        <div class="nk-tb-col tb-col-lg"><span>Order</span></div>
+                                        <div class="nk-tb-col tb-col-lg"><span>Business Type</span></div>
                                         <div class="nk-tb-col text-end"><span>Amount</span></div>
-                                        <div class="nk-tb-col text-end tb-col-sm"><span>Payment</span></div>
+                                        <div class="nk-tb-col text-end tb-col-sm"><span>Psyment</span></div>
                                         <div class="nk-tb-col nk-tb-col-status"><span class="sub-text d-none d-md-block">Status</span></div>
                                         <div class="nk-tb-col nk-tb-col-tools"></div>
                                     </div><!-- .nk-tb-item -->
@@ -61,18 +61,12 @@
                                     <div class="nk-tb-item">
                                         <div class="nk-tb-col">
                                             <div class="nk-tnx-type">
-                                               {% if x.name == 'bank deposit' %}
-                                               <div class="nk-tnx-type-icon bg-success-dim text-success">
-                                                <img src="{% static 'ui/images/bank.png' %}" alt="">
-                                            </div>
-                                               {% else %}
-                                               <div class="nk-tnx-type-icon bg-success-dim text-success">
-                                                <img src="{% static 'ui/images/flutterwave.png' %}" alt="">
-                                            </div>
-                                               {% endif %}
+                                                <div class="nk-tnx-type-icon bg-success-dim text-success">
+                                                    <img src="{% static 'ui/images/bank.png' %}" alt="">
+                                                </div>
                                                 <div class="nk-tnx-type-text">
-                                                    <span class="tb-lead">{{x.coin.name}}</span>
-                                                    <span class="tb-date">{{x.buy_date}}</span>
+                                                    <span class="tb-lead">withdrawal Request</span>
+                                                    <span class="tb-date">{{x.date}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -81,8 +75,8 @@
                                             <span class="tb-sub">mypay*****com</span>
                                         </div>
                                         <div class="nk-tb-col tb-col-lg">
-                                            <span class="tb-lead-sub">Business Type</span>
-                                            <span class="badge badge-dot bg-success">{{x.name}}</span>
+
+                                            <span class="badge badge-dot bg-warning">withdrawal</span>
                                         </div>
                                         <div class="nk-tb-col text-end">
                                             <!-- <span class="tb-amount">+ 0.010201 <span>BTC</span></span> -->
@@ -95,25 +89,34 @@
                                         <div class="nk-tb-col nk-tb-col-status">
                                             <div class="dot dot-success d-md-none"></div>
                                            {% if x.status %}
-                                           <span class="badge badge-sm badge-dim bg-outline-success d-none d-md-inline-flex">Successful</span>
+                                           <span class="badge badge-sm badge-dim bg-outline-success d-none d-md-inline-flex">Approved</span>
                                            {% else %}
-                                           <span class="badge badge-sm badge-dim bg-outline-warning d-none d-md-inline-flex">unseccessful</span>
+                                           <span class="badge badge-sm badge-dim bg-outline-warning d-none d-md-inline-flex">Pending</span>
                                            {% endif %}
                                         </div>
                                         {{uemail}}
                                         <div class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-2">
 
-                                                <div class="dropdown">
-                                                    <a href="#" class="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <ul class="link-list-opt">
-                                                           
-                                                            <li><a href="#tranxDetails{{x.id}}" data-bs-toggle="modal"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                            
-                                                        </ul>
+                                                    <div class="dropdown">
+                                                        <a href="#" class="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <ul class="link-list-opt">
+                                                                {% if x.status %}
+                                                                <li><a href="#tranxDetails{{x.id}}" data-bs-toggle="modal"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                {% else %}
+                                                                <form action="" method="POST">
+                                                                    {% csrf_token %}
+                                                                    <input type="text" name="u_id" value="{{x.id}}" hidden>
+                                                                <li><button class="btn" type="submit"><em class="icon ni ni-done"></em><span>Approve</span></button></li>
+                                                            </form>
+                                                                <li><a href="/superadmin/trancryptoselldelete/{{x.id}}"><em class="icon ni ni-cross-round"></em><span>Reject</span></a></li>
+
+                                                                <li><a href="#tranxDetails{{x.id}}" data-bs-toggle="modal"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                            {% endif %}
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -129,26 +132,27 @@
             </a>
             <div class="modal-body modal-body-md">
                 <div class="nk-modal-head mb-3 mb-sm-5">
-                   </div>
+                    <h4 class="nk-modal-title title">Transaction ID: <small class="text-primary">{{x.invoice}}</small></h4>
+                </div>
                 <div class="nk-tnx-details">
                     <div class="nk-block-between flex-wrap g-3">
                         <div class="nk-tnx-type">
                             <div class="nk-tnx-type-icon bg-warning text-white">
-                                <img src="{% static 'ui/images/flutterwave.png' %}" alt="">
+                                <img src="{{x.coin.logo.url}}" alt="">
                             </div>
                             <div class="nk-tnx-type-text">
-                                <h5 class="title">+ N{{x.amount}}</h5>
+                                <h5 class="title"> -N{{x.amount}}</h5>
                                 <span class="sub-text mt-n1">{{x.date}}</span>
                             </div>
                         </div>
                         <ul class="align-center flex-wrap gx-3">
                             {% if x.status %}
                             <li>
-                                <span class="badge badge-sm bg-success">Successful</span>
+                                <span class="badge badge-sm bg-success">Completed</span>
                             </li>
                             {% else %}
                             <li>
-                                <span class="badge badge-sm bg-warning">unseccessful</span>
+                                <span class="badge badge-sm bg-warning">Pending</span>
                             </li>
                             {% endif %}
                         </ul>
@@ -158,16 +162,22 @@
                     </div>
                     <div class="row gy-3">
                         <div class="col-lg-6">
-                            <span class="sub-text">Total Balance</span>
-                            <span class="caption-text">{{x.balance.amount}}</span>
+                            <span class="sub-text">Bank</span>
+                            <span class="caption-text">{{x.bank.bank_name}}</span>
                         </div>
 
                         <div class="col-lg-6">
-                            <span class="sub-text">Transaction Fee</span>
-                            <span class="caption-text">$0</span>
+                            <span class="sub-text">Account Number</span>
+                            <span class="caption-text">{{x.account_number}}</span>
                         </div>
                         <div class="col-lg-6">
-                            </div>
+                            <span class="sub-text">withdrawal Amount</span>
+                            <span class="caption-text">N{{x.amount}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="sub-text">Name</span>
+                            <span class="caption-text">{{x.name}}</span>
+                        </div>
                     </div><!-- .row -->
                     <div class="nk-modal-head mt-sm-5 mt-4 mb-4">
                         <h5 class="title">Transaction Details</h5>
@@ -175,20 +185,20 @@
                     <div class="row gy-3">
                         <div class="col-lg-6">
                             <span class="sub-text">Transaction Type</span>
-                            <span class="caption-text">Deposit</span>
+                            <span class="caption-text">withdraw</span>
                         </div>
                         <div class="col-lg-6">
                             <span class="sub-text">Payment Gateway</span>
-                            <span class="caption-text align-center"><span class="badge bg-primary ms-2 text-white">flutterwave</span></span>
+                            <span class="caption-text align-center"><span class="badge bg-primary ms-2 text-white">Bank transfer</span></span>
                         </div>
                         <div class="col-lg-6">
-                            <span class="sub-text">Payment From</span>
-                             <span class="caption-text text-break">{{x.balance.user.first_name}} {{x.balance.user.last_name}}</span>
+                            <span class="sub-text">Request From</span>
+                            <span class="caption-text text-break">{{x.user.first_name}} {{x.user.last_name}}</span>
                         </div>
-                        <div class="col-lg-6">
-                            <!-- <span class="sub-text">crypto Transfer to</span>
-                            <span class="caption-text text-break">{{x.receiving_address}}</span> -->
-                        </div>
+                        <!-- <div class="col-lg-6">
+                            <span class="sub-text">Payment To</span>
+                            <span class="caption-text text-break">{{x.payment_info|linebreaksbr|urlize}}</span>
+                        </div> -->
 
                     </div><!-- .row -->
                 </div><!-- .nk-tnx-details -->

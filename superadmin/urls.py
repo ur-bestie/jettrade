@@ -21,5 +21,6 @@ urlpatterns = [
     path('passwordchange',views.passwordchange,name='passwordchange'),
     path('adminsettings',views.adminsettings,name='adminsettings'),
     path('deposit',views.deposit,name='deposit'),
+    path('withdraw',views.withdraw,name='withdraw'),
 
 ]

@@ -15,7 +15,7 @@
                                     <div class="invoice-logo">
                                         <!-- logo started -->
                                         <div class="logo">
-                                            <span style="color: dodgerblue;">Deposit</span>
+                                            <span style="color: dodgerblue;">withdrawal</span>
                                         </div>
                                         <!-- logo ended -->
                                     </div>
@@ -71,10 +71,11 @@
                                         <table class="default-table invoice-table">
                                             <thead>
                                             <tr>
-                                                <th>Deposit type</th>
+                                                <th>name</th>
                                                 <th>Amount</th>
                                                 <th>Status</th>
-                                                <th>Payment</th>
+                                                <th>Account number</th>
+                                                <th>Date</th>
                                             </tr>
                                             </thead>
 
@@ -87,6 +88,7 @@
                                                 {% else %}
                                                 <td>Pending</td>
                                                 {% endif %}
+                                                <td>{{x.account_number}}</td>
                                                 <td>{{x.date}}</td>
                                             </tr>
                                            

@@ -165,15 +165,80 @@ def addfunds(request):
         except (ValueError, TypeError):
             return render(request, 'user/dashboard/addfunds.html', {'error': 'Invalid amount.'})
 
+        est = amount * 0.017 
+        pay = amount + est
         
-        balance_history_obj = balance_history.objects.create(balance=bl, amount=amount)
+        balance_history_obj = balance_history.objects.create(balance=bl,payamount=pay, amount=amount)
         # Get the ID of the newly created balance_history object
         x = balance_history_obj.id
         # Redirect to the payment page with the correct parameter name
         return redirect(reverse('payment', kwargs={'id': x}))
     else:
          return render(request, 'user/dashboard/addfunds.html')
+
+
+@login_required
+def withdraw(request):
+    user = request.user
+    user_id = user.id
+    x = bankdetails.objects.all()
+    bl = balance.objects.filter(user_id=user_id).first()
     
+    if request.method == 'POST':
+        bank_id = request.POST.get('bank_id')
+        name = request.POST.get('name')
+        account_number = request.POST.get('account_number')
+        amt = request.POST.get('amount')
+        bd = bankdetails.objects.get(pk=bank_id)
+        amount = int(amt)
+
+        # API Call to Flutterwave
+        # url = "https://api.flutterwave.com/v3/transfers"
+        # headers = {
+        #     "Authorization": f"Bearer {settings.FLUTTERWAVE_SECRET_KEY}",  # Use your secret key from settings
+        #     "Content-Type": "application/json"
+        # }
+        # data = {
+        #     "account_bank": bank_id,  # Assuming 'bank_code' is a field in bankdetails
+        #     "account_number": account_number,
+        #     "amount": amount,
+        #     "narration": "Withdrawal",
+        #     "currency": "NGN",
+        #     "reference": f"withdrawal_{user_id}",
+        #     "callback_url": "https://yourwebsite.com/callback-url",  # Replace with your callback URL
+        #     "debit_currency": "NGN"
+        # }
+
+        # response = requests.post(url, headers=headers, json=data)
+        
+        # if response.status_code == 200:
+        #     # Handle successful transfer response
+        #     print("Transfer successful:", response.json())
+            # Optionally, update the withd_his object with API response data
+            
+            # Create withdrawal history record
+        if bl.amount < amount:
+               messages.error(request,'amount is greater than your balance')
+               return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+                x = withd_his.objects.create(user=user, bank=bd, name=name,account_number=account_number, amount=amount)
+                sid = x.id
+                ra = recent_activity.objects.create(user=request.user, name='withdrawal', amount=amount, a_id=sid)
+            
+            # Create recent activity record
+        
+
+            # x.api_response = response.json()  # Example field, add to your model if necessary
+            # x.save()
+        return redirect('activities')
+        # else:
+        #     # Handle failed transfer response
+        #     print("Transfer failed:", response.status_code, response.text)
+        #     # Optionally, handle the error (e.g., show a message to the user)
+        
+        # return redirect('withdraw')
+
+    return render(request, 'user/dashboard/withdraw.html', locals())
     
 def payment(request, id):
     user = request.user
@@ -217,7 +282,8 @@ def cryptobuy(request):
           user=user,coin=x_id,amount=amount,rate_naira=rate_naira,receiving_address=receiving_address,payment=payment,paymentmethod=pg_id
        )
         sid = sv.id
-        ra = recent_activity.objects.create(user=request.user,name='crypto buy',img=x_id.logo,amount=amount,a_id=sid) 
+        sv.status = True
+        ra = recent_activity.objects.create(user=request.user,name='crypto buy',amount=amount,a_id=sid) 
         sv.save()
        #email sell 
        subject = "Crypto Buy"
@@ -867,6 +933,15 @@ def autodep(request, id):
     bl.amount += ba
     bl.save()
     x.save()
+    sid = x.id
+    image_path = static('ui/images/flutterwave.png')
+    ra = recent_activity.objects.create(
+                        user=request.user,
+                        name='Flutterwave deposit',
+                        img=image_path,
+                        amount=x.amount,
+                        a_id=sid
+                        )
     messages.success(request, 'account funded successfully')
    return redirect('activities')
 
@@ -879,6 +954,8 @@ def autodel(request, id):
 # def forgetpassword(request):
 #    return render(request,'user/auth/forgetpassword.html')
 
-
+def withhis(request, id):
+   x = withd_his.objects.get(pk=id)
+   return render(request, 'user/dashboard/withhis.html',locals())
 
 #NR6UJ8XXW6LHTERKMZXNGDVF

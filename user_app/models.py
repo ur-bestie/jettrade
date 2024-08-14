@@ -179,13 +179,13 @@ class balance(models.Model):
 class balance_history(models.Model):
     balance = models.ForeignKey(balance, on_delete=models.CASCADE)
     amount = models.IntegerField(default=0)
+    payamount = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
     date = models.DateTimeField(blank=True,null=True,default=timezone.now)
 
 class recent_activity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=100)
-    img = models.FileField(upload_to='ract/')
     amount = models.IntegerField(default=0)
     a_id = models.IntegerField()
     date = models.DateTimeField(blank=True,null=True,default=timezone.now)
@@ -208,3 +208,25 @@ class datap_history(models.Model):
     dataplan = models.ForeignKey(dataplan, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     date = models.DateTimeField(blank=True,null=True,default=timezone.now)
+
+
+class bankdetails(models.Model):
+    bankcode  = models.CharField(max_length=100)
+    bank_name = models.CharField(max_length=100)
+    
+
+    def __str__(self):
+        return self.bank_name
+    
+
+class withd_his(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True)
+    bank = models.ForeignKey(bankdetails, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    account_number = models.CharField(max_length=100)
+    amount = models.IntegerField(default=0)
+    status = models.BooleanField(default=False)
+    date = models.DateTimeField(blank=True,null=True,default=timezone.now)
+
+    def __str__(self):
+        return self.user.username

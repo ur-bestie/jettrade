@@ -57,7 +57,7 @@ ROOT_URLCONF = 'jettradeapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,'template'],
+        'DIRS': [os.path.join(BASE_DIR, 'template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -179,3 +179,4 @@ LOGGING = {
 
 # settings.py
 AIRTIME_API_KEY = 'aa62ff960278004dfd1ff70662b1e7ac615dd89c'
+FLUTTERWAVE_SECRET_KEY = 'FLWSECK_TEST-173b333746669c49623cbf396f1e9e59-X'

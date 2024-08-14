@@ -15,7 +15,7 @@
             <div class="pb-2"></div>
             <div class="form-custom form-label form-icon">
                 <i class="bi bi-cash-stack font-14"></i>
-            <input name="amount" required type="number" class="form-control rounded-xs" id="c31" value="{{x.amount}}" readonly />
+            <input name="" required type="number" class="form-control rounded-xs" id="c31" value="{{x.amount}}" readonly />
             <label for="c31" class="color-highlight form-label-always-">Amount To Deposit</label>
             
             </div>
@@ -26,6 +26,7 @@
                <input type="hidden" name="currency" value="NGN" />
                <input type="hidden" name="redirect_url" value="http://Jettrade.com/autodep/{{x.id}}" />
                <input type="hidden" name="meta[token]" value="54" />
+               <input type="hidden" name="amount" value="{{x.payamount}}" />
                <input type="hidden" name="customer[name]" value="{{x.balance.user.username}}" />
                <input type="hidden" name="customer[email]" value="{{x.balance.user.email}}" />
             <div class="trc d-flex gap-2">

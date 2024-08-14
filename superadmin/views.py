@@ -442,3 +442,39 @@ https://Jettrade.com.ng .Allright reserve 2024
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
    else:
     return render(request,'admin_temp/deposit.html',locals())
+   
+
+def withdraw(request):
+   x = withd_his.objects.all()
+   t_tal = len(withd_his.objects.all())
+   if request.method == 'POST':
+      u_id = request.POST.get('u_id')
+      sv = withd_his.objects.get(id=u_id)
+      user_id = sv.user.id
+      bl = balance.objects.filter(user_id=user_id).first()
+      sv.status = True
+      bl.amount -= sv.amount
+      bl.save()
+      sv.save()
+      #email sell
+      subject = "Crypto transaction"
+      message = f"""
+ Hello {sv.user.username}, the crypto you sold has been approved.
+https://Jettrade.com.ng .Allright reserve 2024
+"""
+
+      sender = "test@kcls-swift.com"
+      receiver = [sv.user.email, ]
+
+
+      # send_mail(
+      #    subject,
+      #    message,
+      #    sender,
+      #    receiver,
+      #    fail_silently=False,
+      # )
+      messages.success(request,'Payment has been approved')
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+   else: 
+    return render(request,'admin_temp/withdraw.html',locals())

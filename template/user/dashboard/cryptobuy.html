@@ -161,75 +161,72 @@
             
         </form>
         </div>
+        
+ <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    // Your existing code here
 
- 
-        <script>
-            // Get references to the input field, paragraph tags, and payment input field
-            const inputField = document.getElementById('inputam');
-            const rateSpan = document.getElementById('rate');
-            const paymentSpan = document.getElementById('payment');
-            const paymentInput = document.getElementById('paymentInput');
-    
-            // Add event listener to the input field to detect changes
-            inputField.addEventListener('input', function() {
-                // Retrieve the value from the input field and the rate from the paragraph tag
-                const inputValue = parseFloat(inputField.value); // No need to replace characters for number input
-                const rateValue = parseFloat(rateSpan.innerText.replace(/[^\d.-]/g, '')); // Remove non-numeric characters
-                
-                // Check if inputValue and rateValue are valid numbers
-                if (!isNaN(inputValue) && !isNaN(rateValue)) {
-                    // Perform the multiplication
-                    const payment = inputValue * rateValue;
-    
-                    // Update the content of the payment paragraph tag
-                    paymentSpan.innerText = 'N' + payment.toFixed(2); // Assuming 2 decimal places for Naira
-    
-                    // Update the value of the payment input field
-                    paymentInput.value = payment.toFixed(2); // Assuming 2 decimal places for Naira
-                } else {
-                    paymentSpan.innerText = 'N0.00'; // Reset to default if input is invalid
-                    paymentInput.value = ''; // Clear the hidden input if input is invalid
-                }
-            });
-        </script>
-
-<script>
     // Get references to the input field, paragraph tags, and payment input field
-    const inputField1 = document.getElementById('inputam1');
-    const rateSpan1 = document.getElementById('rate1');
-    const paymentSpan1 = document.getElementById('payment1');
-    const paymentInput1 = document.getElementById('paymentInput1');
+    const inputField = document.getElementById('inputam');
+    const rateSpan = document.getElementById('rate');
+    const paymentSpan = document.getElementById('payment');
+    const paymentInput = document.getElementById('paymentInput');
 
     // Add event listener to the input field to detect changes
-    inputField1.addEventListener('input', function() {
+    inputField.addEventListener('input', function() {
         // Retrieve the value from the input field and the rate from the paragraph tag
-        const inputValue = parseFloat(inputField1.value); // No need to replace characters for number input
-        const rateValue = parseFloat(rateSpan1.innerText.replace(/[^\d.-]/g, '')); // Remove non-numeric characters
-        
+        const inputValue = parseFloat(inputField.value);
+        const rateValue = parseFloat(rateSpan.innerText.replace(/[^\d.-]/g, ''));
+
         // Check if inputValue and rateValue are valid numbers
         if (!isNaN(inputValue) && !isNaN(rateValue)) {
             // Perform the multiplication
             const payment = inputValue * rateValue;
 
             // Update the content of the payment paragraph tag
-            paymentSpan1.innerText = 'N' + payment.toFixed(2); // Assuming 2 decimal places for Naira
+            paymentSpan.innerText = 'N' + payment.toFixed(2);
 
             // Update the value of the payment input field
-            paymentInput1.value = payment.toFixed(2); // Assuming 2 decimal places for Naira
+            paymentInput.value = payment.toFixed(2);
         } else {
-            paymentSpan1.innerText = 'N0.00'; // Reset to default if input is invalid
-            paymentInput1.value = ''; // Clear the hidden input if input is invalid
+            paymentSpan.innerText = 'N0.00'; // Reset to default if input is invalid
+            paymentInput.value = ''; // Clear the hidden input if input is invalid
         }
     });
+
+    // Same logic for the second form
+    const inputField1 = document.getElementById('inputam1');
+    const rateSpan1 = document.getElementById('rate1');
+    const paymentSpan1 = document.getElementById('payment1');
+    const paymentInput1 = document.getElementById('paymentInput1');
+
+    inputField1.addEventListener('input', function() {
+        const inputValue = parseFloat(inputField1.value);
+        const rateValue = parseFloat(rateSpan1.innerText.replace(/[^\d.-]/g, ''));
+
+        if (!isNaN(inputValue) && !isNaN(rateValue)) {
+            const payment = inputValue * rateValue;
+
+            paymentSpan1.innerText = 'N' + payment.toFixed(2);
+            paymentInput1.value = payment.toFixed(2);
+        } else {
+            paymentSpan1.innerText = 'N0.00';
+            paymentInput1.value = '';
+        }
+    });
+});
+
 </script>
-    
- {% else %}
- <script type="text/javascript">
-     // Redirect to another page after 5 seconds
-     setTimeout(function() {
-         window.location.href = '/kyc';
-     }, 1); // 1000 milliseconds = 1 seconds
- </script>
- {% endif %}
+
+{% else %}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                window.location.href = '/kyc';
+            }, 1); // 1000 milliseconds = 1 second
+        });
+    </script>
+{% endif %}
+
 
 {% endblock %}
